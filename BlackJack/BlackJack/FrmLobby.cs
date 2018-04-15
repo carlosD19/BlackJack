@@ -18,6 +18,11 @@ namespace BlackJack
         private int speed;
         private Point point;
         private EUsuario usuario;
+        private Point p1;
+        private Point p2;
+        private Point p3;
+        private int i;
+        private List<String> lista = new List<string>();
 
         public FrmLobby()
         {
@@ -41,6 +46,14 @@ namespace BlackJack
             speed = 3;
             point = new Point(panel1.Location.X - speed, panel1.Location.Y);
             CargarDatos();
+            pbUno.BringToFront();
+            i = 1;
+            p1 = new Point(pbUno.Location.X, pbUno.Location.Y);
+            p2 = new Point(pbDos.Location.X, pbDos.Location.Y);
+            p3 = new Point(pbTres.Location.X, pbTres.Location.Y);
+            lista.Add("Carlos");
+            lista.Add("Jenny");
+            lista.Add("Kevin");
         }
 
         private void CargarDatos()
@@ -94,6 +107,79 @@ namespace BlackJack
             if (Owner != null)
             {
                 Owner.Show();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string temp = lista[lista.Count - 1];
+            lista.RemoveAt(lista.Count - 1);
+            lista.Insert(0, temp);
+            pbUno.Location = p2;
+            pbDos.Location = p3;
+            pbTres.Location = p1;
+            p1 = new Point(pbUno.Location.X, pbUno.Location.Y);
+            p2 = new Point(pbDos.Location.X, pbDos.Location.Y);
+            p3 = new Point(pbTres.Location.X, pbTres.Location.Y);
+            switch (i)
+            {
+                case 1:
+                    pbTres.BringToFront();
+                    pbUno.SendToBack();
+                    pbDos.SendToBack();
+                    i = 3;
+                    break;
+                case 2:
+                    pbUno.BringToFront();
+                    pbDos.SendToBack();
+                    pbTres.SendToBack();
+                    i = 2;
+                    break;
+                case 3:
+                    pbDos.BringToFront();
+                    pbTres.SendToBack();
+                    pbUno.SendToBack();
+                    i = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string temp = lista[0];
+            lista.RemoveAt(0);
+            lista.Add(temp);
+            pbUno.Location = p3;
+            pbDos.Location = p1;
+            pbTres.Location = p2;
+
+            p1 = new Point(pbUno.Location.X, pbUno.Location.Y);
+            p2 = new Point(pbDos.Location.X, pbDos.Location.Y);
+            p3 = new Point(pbTres.Location.X, pbTres.Location.Y);
+            switch (i)
+            {
+                case 1:
+                    pbDos.BringToFront();
+                    pbTres.SendToBack();
+                    pbUno.SendToBack();
+                    i = 2;
+                    break;
+                case 2:
+                    pbTres.BringToFront();
+                    pbUno.SendToBack();
+                    pbDos.SendToBack();
+                    i = 3;
+                    break;
+                case 3:
+                    pbUno.BringToFront();
+                    pbDos.SendToBack();
+                    pbTres.SendToBack();
+                    i = 1;
+                    break;
+                default:
+                    break;
             }
         }
     }

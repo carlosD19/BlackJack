@@ -250,7 +250,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BlackJack.Properties.Resources.mesa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1258, 689);
+            this.ClientSize = new System.Drawing.Size(1290, 689);
             this.Controls.Add(this.btnPedir);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.pb100);
