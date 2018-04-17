@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tweetinvi.Credentials.Models;
 using Tweetinvi.Models;
 
 namespace BlackJack
@@ -22,6 +23,7 @@ namespace BlackJack
         protected readonly FacebookClient userFacebook;
         public FacebookOAuthResult facebookOAuthResult { get; private set; }
         public IAuthenticatedUser userTwitter { get; private set; }
+
         public FrmWebBrowser(string appId, string extendedPermissions, bool tipo)
             : this(new FacebookClient(), appId, extendedPermissions, tipo)
         {

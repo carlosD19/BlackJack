@@ -103,14 +103,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CorreoBOL.cs" />
+    <Compile Include="MesaBOL.cs" />
+    <Compile Include="PartidaBOL.cs" />
     <Compile Include="TwitterConfigBOL.cs" />
     <Compile Include="MiniJsonBOL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsuarioBOL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlackJackDAL\BlackJackDAL.csproj">
       <Project>{84D10153-95E7-453E-AE17-257E7403C2E8}</Project>
       <Name>BlackJackDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlackJackENL\BlackJackENL.csproj">
+      <Project>{C95ADD90-02F7-4B89-9DFC-3630EBDA5C81}</Project>
+      <Name>BlackJackENL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

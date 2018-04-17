@@ -28,384 +28,350 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLobby));
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MesaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.publicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.privadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.depositarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblApe = new System.Windows.Forms.Label();
             this.lblNom = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.pbImagen = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pbUno = new System.Windows.Forms.Panel();
-            this.pbTres = new System.Windows.Forms.Panel();
-            this.pbDos = new System.Windows.Forms.Panel();
+            this.dgvUsuario = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.dgvMesa = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.lblError = new System.Windows.Forms.Label();
+            this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eMesaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.capacidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.privadaDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.jugadorActDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contadorJugDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEnviar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
-            this.pbUno.SuspendLayout();
-            this.pbTres.SuspendLayout();
-            this.pbDos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMesa)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eMesaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MesaToolStripMenuItem});
+            this.MesaToolStripMenuItem,
+            this.cuentaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(880, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(880, 26);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // MesaToolStripMenuItem
             // 
             this.MesaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.publicaToolStripMenuItem,
-            this.privadaToolStripMenuItem});
-            this.MesaToolStripMenuItem.Name = "MesaToolStripMenuItem";
-            this.MesaToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.MesaToolStripMenuItem.Text = "Mesa";
-            // 
-            // publicaToolStripMenuItem
-            // 
-            this.publicaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.crearToolStripMenuItem,
             this.modificarToolStripMenuItem,
             this.eliminarToolStripMenuItem});
-            this.publicaToolStripMenuItem.Name = "publicaToolStripMenuItem";
-            this.publicaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.publicaToolStripMenuItem.Text = "Publica";
+            this.MesaToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MesaToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
+            this.MesaToolStripMenuItem.Name = "MesaToolStripMenuItem";
+            this.MesaToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
+            this.MesaToolStripMenuItem.Text = "Mesa";
             // 
-            // crearToolStripMenuItem
+            // cuentaToolStripMenuItem
             // 
-            this.crearToolStripMenuItem.Name = "crearToolStripMenuItem";
-            this.crearToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.crearToolStripMenuItem.Text = "Crear";
+            this.cuentaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.depositarToolStripMenuItem});
+            this.cuentaToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuentaToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
+            this.cuentaToolStripMenuItem.Name = "cuentaToolStripMenuItem";
+            this.cuentaToolStripMenuItem.Size = new System.Drawing.Size(70, 22);
+            this.cuentaToolStripMenuItem.Text = "Cuenta";
             // 
-            // modificarToolStripMenuItem
+            // depositarToolStripMenuItem
             // 
-            this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.modificarToolStripMenuItem.Text = "Modificar";
-            // 
-            // eliminarToolStripMenuItem
-            // 
-            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
-            // 
-            // privadaToolStripMenuItem
-            // 
-            this.privadaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearToolStripMenuItem1,
-            this.modificarToolStripMenuItem1,
-            this.eliminarToolStripMenuItem1});
-            this.privadaToolStripMenuItem.Name = "privadaToolStripMenuItem";
-            this.privadaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.privadaToolStripMenuItem.Text = "Privada";
-            // 
-            // crearToolStripMenuItem1
-            // 
-            this.crearToolStripMenuItem1.Name = "crearToolStripMenuItem1";
-            this.crearToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
-            this.crearToolStripMenuItem1.Text = "Crear";
-            // 
-            // modificarToolStripMenuItem1
-            // 
-            this.modificarToolStripMenuItem1.Name = "modificarToolStripMenuItem1";
-            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
-            this.modificarToolStripMenuItem1.Text = "Modificar";
-            // 
-            // eliminarToolStripMenuItem1
-            // 
-            this.eliminarToolStripMenuItem1.Name = "eliminarToolStripMenuItem1";
-            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
-            this.eliminarToolStripMenuItem1.Text = "Eliminar";
+            this.depositarToolStripMenuItem.Name = "depositarToolStripMenuItem";
+            this.depositarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.depositarToolStripMenuItem.Text = "Depositar";
+            this.depositarToolStripMenuItem.Click += new System.EventHandler(this.depositarToolStripMenuItem_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.lblEmail);
             this.panel1.Controls.Add(this.lblApe);
             this.panel1.Controls.Add(this.lblNom);
-            this.panel1.Location = new System.Drawing.Point(687, 85);
+            this.panel1.Location = new System.Drawing.Point(687, 73);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(193, 108);
+            this.panel1.Size = new System.Drawing.Size(193, 100);
             this.panel1.TabIndex = 5;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(27, 84);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(41, 13);
-            this.linkLabel1.TabIndex = 3;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Cuenta";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.panel1.Visible = false;
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(27, 56);
+            this.lblEmail.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.ForeColor = System.Drawing.Color.Red;
+            this.lblEmail.Location = new System.Drawing.Point(15, 76);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(32, 13);
+            this.lblEmail.Size = new System.Drawing.Size(41, 16);
             this.lblEmail.TabIndex = 2;
             this.lblEmail.Text = "Email";
             // 
             // lblApe
             // 
             this.lblApe.AutoSize = true;
-            this.lblApe.Location = new System.Drawing.Point(27, 28);
+            this.lblApe.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApe.ForeColor = System.Drawing.Color.Red;
+            this.lblApe.Location = new System.Drawing.Point(15, 43);
             this.lblApe.Name = "lblApe";
-            this.lblApe.Size = new System.Drawing.Size(44, 13);
+            this.lblApe.Size = new System.Drawing.Size(54, 16);
             this.lblApe.TabIndex = 1;
             this.lblApe.Text = "Apellido";
             // 
             // lblNom
             // 
             this.lblNom.AutoSize = true;
-            this.lblNom.Location = new System.Drawing.Point(27, 0);
+            this.lblNom.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNom.ForeColor = System.Drawing.Color.Red;
+            this.lblNom.Location = new System.Drawing.Point(15, 10);
             this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(44, 13);
+            this.lblNom.Size = new System.Drawing.Size(53, 16);
             this.lblNom.TabIndex = 0;
             this.lblNom.Text = "Nombre";
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::BlackJack.Properties.Resources.next;
-            this.button1.Location = new System.Drawing.Point(39, 199);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(52, 197);
-            this.button1.TabIndex = 6;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // pbImagen
             // 
-            this.pbImagen.Location = new System.Drawing.Point(817, 27);
+            this.pbImagen.BackColor = System.Drawing.Color.Transparent;
+            this.pbImagen.Location = new System.Drawing.Point(817, 15);
             this.pbImagen.Name = "pbImagen";
             this.pbImagen.Size = new System.Drawing.Size(51, 52);
             this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagen.TabIndex = 1;
             this.pbImagen.TabStop = false;
-            this.pbImagen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FrmLobby_MouseMove);
+            this.pbImagen.MouseEnter += new System.EventHandler(this.pbImagen_MouseEnter);
+            this.pbImagen.MouseLeave += new System.EventHandler(this.pbImagen_MouseLeave);
             // 
-            // button2
+            // dgvUsuario
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = global::BlackJack.Properties.Resources.previous;
-            this.button2.Location = new System.Drawing.Point(791, 199);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(52, 197);
-            this.button2.TabIndex = 7;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.dgvUsuario.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            this.dgvUsuario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvUsuario.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nombre,
+            this.Email,
+            this.Id});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsuario.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvUsuario.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvUsuario.Location = new System.Drawing.Point(3, 3);
+            this.dgvUsuario.Name = "dgvUsuario";
+            this.dgvUsuario.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvUsuario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUsuario.Size = new System.Drawing.Size(393, 100);
+            this.dgvUsuario.TabIndex = 6;
+            this.dgvUsuario.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // pbUno
+            // Nombre
             // 
-            this.pbUno.BackColor = System.Drawing.Color.Transparent;
-            this.pbUno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbUno.Controls.Add(this.label4);
-            this.pbUno.Controls.Add(this.label3);
-            this.pbUno.Controls.Add(this.label2);
-            this.pbUno.Controls.Add(this.label1);
-            this.pbUno.Location = new System.Drawing.Point(113, 199);
-            this.pbUno.Name = "pbUno";
-            this.pbUno.Size = new System.Drawing.Size(242, 197);
-            this.pbUno.TabIndex = 8;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
-            // pbTres
+            // Email
             // 
-            this.pbTres.BackColor = System.Drawing.Color.Transparent;
-            this.pbTres.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbTres.Controls.Add(this.label9);
-            this.pbTres.Controls.Add(this.label11);
-            this.pbTres.Controls.Add(this.label10);
-            this.pbTres.Controls.Add(this.label12);
-            this.pbTres.Location = new System.Drawing.Point(525, 199);
-            this.pbTres.Name = "pbTres";
-            this.pbTres.Size = new System.Drawing.Size(242, 197);
-            this.pbTres.TabIndex = 9;
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            this.Email.Width = 250;
             // 
-            // pbDos
+            // Id
             // 
-            this.pbDos.BackColor = System.Drawing.Color.Transparent;
-            this.pbDos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbDos.Controls.Add(this.label5);
-            this.pbDos.Controls.Add(this.label6);
-            this.pbDos.Controls.Add(this.label8);
-            this.pbDos.Controls.Add(this.label7);
-            this.pbDos.Location = new System.Drawing.Point(319, 199);
-            this.pbDos.Name = "pbDos";
-            this.pbDos.Size = new System.Drawing.Size(242, 197);
-            this.pbDos.TabIndex = 10;
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(23, 19);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(79, 171);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Panel UNO";
+            this.label1.Size = new System.Drawing.Size(71, 22);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Mesas:";
             // 
-            // label2
+            // dgvMesa
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(23, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.dgvMesa.AutoGenerateColumns = false;
+            this.dgvMesa.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvMesa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMesa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.nombreDataGridViewTextBoxColumn,
+            this.capacidadDataGridViewTextBoxColumn,
+            this.passDataGridViewTextBoxColumn,
+            this.privadaDataGridViewCheckBoxColumn,
+            this.jugadorActDataGridViewTextBoxColumn,
+            this.contadorJugDataGridViewTextBoxColumn});
+            this.dgvMesa.DataSource = this.eMesaBindingSource;
+            this.dgvMesa.GridColor = System.Drawing.SystemColors.Control;
+            this.dgvMesa.Location = new System.Drawing.Point(83, 197);
+            this.dgvMesa.Name = "dgvMesa";
+            this.dgvMesa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMesa.Size = new System.Drawing.Size(714, 275);
+            this.dgvMesa.TabIndex = 9;
+            this.dgvMesa.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMesa_CellMouseClick);
             // 
-            // label3
+            // panel2
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(23, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.Controls.Add(this.btnEnviar);
+            this.panel2.Controls.Add(this.richTextBox1);
+            this.panel2.Controls.Add(this.dgvUsuario);
+            this.panel2.Location = new System.Drawing.Point(83, 32);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(598, 141);
+            this.panel2.TabIndex = 10;
             // 
-            // label4
+            // richTextBox1
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(23, 148);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "label4";
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBox1.Location = new System.Drawing.Point(403, 4);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(192, 99);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
             // 
-            // label5
+            // lblError
             // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(24, 148);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "label5";
+            this.lblError.AutoSize = true;
+            this.lblError.BackColor = System.Drawing.Color.Transparent;
+            this.lblError.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.Location = new System.Drawing.Point(12, 478);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 18);
+            this.lblError.TabIndex = 11;
             // 
-            // label6
+            // crearToolStripMenuItem
             // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(24, 105);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "label6";
+            this.crearToolStripMenuItem.Name = "crearToolStripMenuItem";
+            this.crearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem.Text = "Crear";
+            this.crearToolStripMenuItem.Click += new System.EventHandler(this.crearToolStripMenuItem_Click);
             // 
-            // label7
+            // modificarToolStripMenuItem
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(24, 62);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "label7";
+            this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
-            // label8
+            // eliminarToolStripMenuItem
             // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(24, 19);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Panel DOS";
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
-            // label9
+            // eMesaBindingSource
             // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(22, 139);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "label9";
+            this.eMesaBindingSource.DataSource = typeof(BlackJackENL.EMesa);
             // 
-            // label10
+            // idDataGridViewTextBoxColumn
             // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(22, 105);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 13);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "label10";
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Visible = false;
             // 
-            // label11
+            // nombreDataGridViewTextBoxColumn
             // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(22, 19);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 13);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Panel TRES";
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
             // 
-            // label12
+            // capacidadDataGridViewTextBoxColumn
             // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(22, 62);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "label12";
+            this.capacidadDataGridViewTextBoxColumn.DataPropertyName = "Capacidad";
+            this.capacidadDataGridViewTextBoxColumn.HeaderText = "Capacidad";
+            this.capacidadDataGridViewTextBoxColumn.Name = "capacidadDataGridViewTextBoxColumn";
+            // 
+            // passDataGridViewTextBoxColumn
+            // 
+            this.passDataGridViewTextBoxColumn.DataPropertyName = "Pass";
+            this.passDataGridViewTextBoxColumn.HeaderText = "Pass";
+            this.passDataGridViewTextBoxColumn.Name = "passDataGridViewTextBoxColumn";
+            this.passDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // privadaDataGridViewCheckBoxColumn
+            // 
+            this.privadaDataGridViewCheckBoxColumn.DataPropertyName = "Privada";
+            this.privadaDataGridViewCheckBoxColumn.HeaderText = "Privada";
+            this.privadaDataGridViewCheckBoxColumn.Name = "privadaDataGridViewCheckBoxColumn";
+            // 
+            // jugadorActDataGridViewTextBoxColumn
+            // 
+            this.jugadorActDataGridViewTextBoxColumn.DataPropertyName = "JugadorAct";
+            this.jugadorActDataGridViewTextBoxColumn.HeaderText = "JugadorAct";
+            this.jugadorActDataGridViewTextBoxColumn.Name = "jugadorActDataGridViewTextBoxColumn";
+            this.jugadorActDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // contadorJugDataGridViewTextBoxColumn
+            // 
+            this.contadorJugDataGridViewTextBoxColumn.DataPropertyName = "ContadorJug";
+            this.contadorJugDataGridViewTextBoxColumn.HeaderText = "ContadorJug";
+            this.contadorJugDataGridViewTextBoxColumn.Name = "contadorJugDataGridViewTextBoxColumn";
+            this.contadorJugDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // btnEnviar
+            // 
+            this.btnEnviar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnviar.Location = new System.Drawing.Point(533, 110);
+            this.btnEnviar.Name = "btnEnviar";
+            this.btnEnviar.Size = new System.Drawing.Size(62, 28);
+            this.btnEnviar.TabIndex = 8;
+            this.btnEnviar.Text = "Enviar";
+            this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // FrmLobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::BlackJack.Properties.Resources.casino;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(880, 500);
-            this.Controls.Add(this.pbDos);
-            this.Controls.Add(this.pbTres);
-            this.Controls.Add(this.pbUno);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.dgvMesa);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pbImagen);
             this.Controls.Add(this.menuStrip1);
@@ -414,19 +380,15 @@
             this.Text = "FrmLobby";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmLobby_FormClosing);
             this.Load += new System.EventHandler(this.FrmLobby_Load);
-            this.LocationChanged += new System.EventHandler(this.FrmLobby_LocationChanged);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FrmLobby_MouseMove);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
-            this.pbUno.ResumeLayout(false);
-            this.pbUno.PerformLayout();
-            this.pbTres.ResumeLayout(false);
-            this.pbTres.PerformLayout();
-            this.pbDos.ResumeLayout(false);
-            this.pbDos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMesa)).EndInit();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.eMesaBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -436,36 +398,33 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem MesaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem publicaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem privadaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.PictureBox pbImagen;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblApe;
         private System.Windows.Forms.Label lblNom;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel pbUno;
-        private System.Windows.Forms.Panel pbTres;
-        private System.Windows.Forms.Panel pbDos;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem cuentaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem depositarToolStripMenuItem;
+        private System.Windows.Forms.DataGridView dgvUsuario;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridView dgvMesa;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn capacidadDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn passDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn privadaDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn jugadorActDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contadorJugDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource eMesaBindingSource;
+        private System.Windows.Forms.Button btnEnviar;
     }
 }

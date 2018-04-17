@@ -23,8 +23,8 @@ namespace BlackJack
         private string accessToken;
         private MiniJsonBOL bol;
         private EUsuario usuario;
-        TwitterConfigBOL tw;
-
+        private TwitterConfigBOL tw;
+        private UsuarioBOL uBOL;
         public FrmInicio()
         {
             InitializeComponent();
@@ -76,17 +76,25 @@ namespace BlackJack
             string id_Usu = dict["id"].ToString();
             string img = String.Format("https://graph.facebook.com/{0}/picture", id_Usu);
             usuario.Imagen = img;
-            FrmLobby frm = new FrmLobby(usuario);
-            frm.Show();
+            usuario.IdApp = long.Parse(id_Usu);
+            EUsuario u = new EUsuario();
+            u = uBOL.VerificarUsuario(usuario);
+            if (u != null)
+            {
+                FrmLobby frm = new FrmLobby(u);
+                frm.Show();
+            }
         }
 
         private void FrmInicio_Load(object sender, EventArgs e)
         {
             bol = new MiniJsonBOL();
+            uBOL = new UsuarioBOL();
         }
 
         private void btnTwitter_Click(object sender, EventArgs e)
         {
+            TwitterConfigBOL t = new TwitterConfigBOL();
             tw = new TwitterConfigBOL();
             var frm = new FrmWebBrowser(tw.SolicitudCredenciales(), false);
             frm.ShowDialog();
@@ -101,8 +109,15 @@ namespace BlackJack
                 usuario.Nombre = userTwitter.Name;
                 usuario.Email = userTwitter.Email;
                 usuario.Imagen = userTwitter.ProfileImageUrl;
-                FrmLobby frm = new FrmLobby(usuario);
-                frm.Show();
+                usuario.Apellido = "";
+                usuario.IdApp = userTwitter.Id;
+                EUsuario u = new EUsuario();
+                u = uBOL.VerificarUsuario(usuario);
+                if (u != null)
+                {
+                    FrmLobby frm = new FrmLobby(u);
+                    frm.Show();
+                }
             }
         }
     }
