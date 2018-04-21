@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlackJackENL;
 using Npgsql;
 
@@ -242,7 +239,7 @@ namespace BlackJackDAL
             mesa.Activo = Boolean.Parse(reader["activo"].ToString());
             mesa.Pass = reader["pass"].ToString();
             mesa.Nombre = reader["nombre"].ToString();
-            mesa.JugadorAct = Int32.Parse(reader["jug_act"].ToString());
+            mesa.JugadorAct = Int32.Parse(reader["jug_actual"].ToString());
             mesa.Capacidad = Int32.Parse(reader["capacidad"].ToString());
             mesa.Turno = Int32.Parse(reader["turno"].ToString());
             return mesa;

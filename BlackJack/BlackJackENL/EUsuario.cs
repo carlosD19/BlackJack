@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 
 namespace BlackJackENL
@@ -19,6 +15,6 @@ namespace BlackJackENL
         public double Apostado { get; set; }
         public double Ganado { get; set; }
         public bool Aposto { get; set; }
-        public Card[] Cartas { get; set; }
+        public List<string> Cartas { get; set; }
     }
 }
