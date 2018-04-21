@@ -80,5 +80,10 @@ namespace BlackJackBOL
         {
             dal.SalirPartida(id);
         }
+
+        public bool VerificarPass(string pass)
+        {
+            return dal.VerificarP(pass);
+        }
     }
 }

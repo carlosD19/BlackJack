@@ -54,6 +54,20 @@ namespace BlackJackDAL
             }
         }
 
+        public bool VerificarP(string pass)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"select * from mesa where pass = @pass and activo = @act";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@pass", pass);
+                cmd.Parameters.AddWithValue("@act", true);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                return reader.Read();
+            }
+        }
+
         public void SalirPartida(int id)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))

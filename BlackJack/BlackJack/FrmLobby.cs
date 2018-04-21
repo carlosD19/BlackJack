@@ -22,7 +22,7 @@ namespace BlackJack
         private List<string> copia;
         private List<EUsuario> listaU;
         private List<EMesa> listaM;
-        
+        private MesaBOL mBOL;
 
         public FrmLobby()
         {
@@ -44,13 +44,15 @@ namespace BlackJack
             Region rg = new Region(gp);
             pbImagen.Region = rg;
             mesa = new EMesa();
+            mBOL = new MesaBOL();
             cBOL = new CorreoBOL();
             uBOL = new UsuarioBOL();
             copia = new List<string>();
             listaM = new List<EMesa>();
             listaU = new List<EUsuario>();
-            richTextBox1.Text += "Destinatarios:" + System.Environment.NewLine;
+            listaM = mBOL.CargarTodo();
             panel2.Visible = false;
+            panel3.Visible = false;
             CargarDatos();
         }
 
@@ -67,19 +69,12 @@ namespace BlackJack
                 lblApe.Text = usuario.Apellido;
                 lblEmail.Text = usuario.Email;
                 pbImagen.Load(usuario.Imagen);
-                //Image img;
-                //WebRequest request = WebRequest.Create(usuario.Imagen);
-                //using (var response = request.GetResponse())
-                //{
-                //    using (var str = response.GetResponseStream())
-                //    {
-                //        img = Bitmap.FromStream(str);
-                //        pbImagen.Image = img;
-                //    }
-                //}
-
             }
-            dgvMesa.DataSource = listaM;
+            foreach (EMesa m in listaM)
+            {
+                bool privada = m.Privada;
+                dgvMesa.Rows.Add(m.Id, m.Nombre, m.Turno + "/" + m.Capacidad, privada);
+            }
         }
 
         private void FrmLobby_FormClosing(object sender, FormClosingEventArgs e)
@@ -130,7 +125,7 @@ namespace BlackJack
             if (bus)
             {
                 copia.Add(c);
-                richTextBox1.Text += dgvUsuario.Rows[e.RowIndex].Cells[1].Value.ToString() + System.Environment.NewLine;
+                txtCorreo.Text += dgvUsuario.Rows[e.RowIndex].Cells[1].Value.ToString() + System.Environment.NewLine;
             }
         }
 
@@ -142,10 +137,17 @@ namespace BlackJack
 
                 if (row >= 0)
                 {
-                    mesa = dgvMesa.CurrentRow.DataBoundItem as EMesa;
-                    if (mesa.Privada)
+                    int id = Int32.Parse(dgvMesa.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    for (int i = 0; i < listaM.Count; i++)
                     {
-                        panel2.Visible = true;
+                        if (listaM[i].Id == id)
+                        {
+                            mesa = listaM[i];
+                            if (mesa.Privada)
+                            {
+                                panel2.Visible = true;
+                            }
+                        }
                     }
                 }
             }
@@ -182,6 +184,7 @@ namespace BlackJack
             {
                 EnviarGmail();
                 lblError.Text = "Correo Enviado.";
+                txtCorreo.Text = "";
                 panel2.Visible = false;
             }
             catch (Exception ex)
@@ -191,7 +194,15 @@ namespace BlackJack
 
         }
 
-        private void dgvMesa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmJuego frm = new FrmJuego(usuario, mesa);
+            frm.Show();
+            frm.Owner = this;
+            Hide();
+        }
+
+        private void dgvMesa_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             try
             {
@@ -199,17 +210,24 @@ namespace BlackJack
 
                 if (row >= 0)
                 {
-                    mesa = dgvMesa.CurrentRow.DataBoundItem as EMesa;
-                    if (mesa.Privada)
+                    int id = Int32.Parse(dgvMesa.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    for (int i = 0; i < listaM.Count; i++)
                     {
-                        panel2.Visible = true;
-                    }
-                    else
-                    {
-                        FrmJuego frm = new FrmJuego(usuario, mesa);
-                        frm.Show();
-                        frm.Owner = this;
-                        Hide();
+                        if (listaM[i].Id == id)
+                        {
+                            mesa = listaM[i];
+                            if (mesa.Privada)
+                            {
+                                panel3.Visible = true;
+                            }
+                            else
+                            {
+                                FrmJuego frm = new FrmJuego(usuario, mesa);
+                                frm.Show();
+                                frm.Owner = this;
+                                Hide();
+                            }
+                        }
                     }
                 }
             }
@@ -219,12 +237,24 @@ namespace BlackJack
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            FrmJuego frm = new FrmJuego(usuario, mesa);
-            frm.Show();
-            frm.Owner = this;
-            Hide();
+            if (mesa != null)
+            {
+                if (mBOL.VerificarPass(txtPass.Text))
+                {
+                    panel3.Visible = false;
+                    txtPass.Text = "";
+                    FrmJuego frm = new FrmJuego(usuario, mesa);
+                    frm.Show();
+                    frm.Owner = this;
+                    Hide();
+                }
+                else
+                {
+                    lblError.Text = "Contraseña Incorrecta.";
+                }
+            }
         }
     }
 }
