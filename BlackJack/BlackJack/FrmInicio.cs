@@ -25,6 +25,7 @@ namespace BlackJack
         private EUsuario usuario;
         private TwitterConfigBOL tw;
         private UsuarioBOL uBOL;
+
         public FrmInicio()
         {
             InitializeComponent();

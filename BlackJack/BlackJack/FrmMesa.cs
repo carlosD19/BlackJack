@@ -52,6 +52,7 @@ namespace BlackJack
         {
             lista = new List<EMesa>();
             mesa = new EMesa();
+            bol = new MesaBOL();
             CargarTabla();
             CambiarTexto();
         }
@@ -82,7 +83,7 @@ namespace BlackJack
                 string rePass = txtRePass.Text;
                 mesa.Capacidad = (int)txtCapacidad.Value;
                 mesa.Nombre = txtNombre.Text;
-                mesa.Privada = cbPrivada.Checked;
+                mesa.Privada = true;
                 mesa.Pass = txtPass.Text;
                 if (bol.Agregar(mesa, rePass))
                 {
@@ -159,31 +160,16 @@ namespace BlackJack
         {
             if (mesa.Activo)
             {
-                txtNombre.Text = mesa.Nombre;
-                txtCapacidad.Value = mesa.Capacidad;
                 if (mesa.Privada)
                 {
+                    txtNombre.Text = mesa.Nombre;
+                    txtCapacidad.Value = mesa.Capacidad;
                     txtPass.Text = mesa.Pass;
-                    cbPrivada.Checked = true;
                 }
                 else
                 {
-                    cbPrivada.Checked = false;
+                    mesa = null;
                 }
-            }
-        }
-
-        private void cbPrivada_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbPrivada.Checked)
-            {
-                txtPass.Enabled = true;
-                txtRePass.Enabled = true;
-            }
-            else
-            {
-                txtPass.Enabled = false;
-                txtRePass.Enabled = false;
             }
         }
 

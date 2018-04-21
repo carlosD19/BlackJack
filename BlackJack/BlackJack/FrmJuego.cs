@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlackJackENL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Speech.Recognition;
 
 namespace BlackJack
 {
@@ -18,11 +20,21 @@ namespace BlackJack
         private int xRes;
         private int yRes;
         private Point point;
-        private int xJ1, xJ2, xJ3, xJ4, xJ5, xJ6;
+        private int xJ1;
+        private EUsuario usuario;
+        private bool bus;
+        private SpeechRecognitionEngine voz;
+
         public FrmJuego()
         {
             InitializeComponent();
             CenterToScreen();
+        }
+        public FrmJuego(EUsuario u, EMesa mesa)
+        {
+            InitializeComponent();
+            CenterToScreen();
+            usuario = u;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,6 +44,8 @@ namespace BlackJack
             y = panel13.Location.Y;
             point = new Point(panel13.Location.X - 3, panel13.Location.Y);
             panel13.BringToFront();
+            panel13.Visible = false;
+            voz = new SpeechRecognitionEngine();
         }
 
         private void pb1_Click(object sender, EventArgs e)
@@ -105,6 +119,7 @@ namespace BlackJack
                 x = panel13.Location.X;
                 y = panel13.Location.Y;
                 timer1.Enabled = false;
+                panel13.Visible = false;
             }
             else
             {
@@ -115,6 +130,7 @@ namespace BlackJack
         private void btnPedir_Click(object sender, EventArgs e)
         {
             ObtenerXY(4);
+            panel13.Visible = true;
             timer1.Enabled = true;
         }
 
@@ -148,6 +164,65 @@ namespace BlackJack
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void FrmJuego_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Owner?.Show();
+        }
+
+        private void btnMicrofono_Click(object sender, EventArgs e)
+        {
+            if (!bus)
+            {
+                btnMicrofono.Image = Properties.Resources.micro;
+                Escucha();
+                bus = true;
+            }
+            else
+            {
+                btnMicrofono.Image = Properties.Resources.nomicro;
+                Escucha();
+                bus = false;
+            }
+        }
+
+        private void Escucha()
+        {
+            try
+            {
+                if (bus)
+                {
+                    voz.RecognizeAsyncStop();
+                }
+                else
+                {
+                    voz.SetInputToDefaultAudioDevice(); // Usaremos el microfono predeterminado del sistema 
+                    voz.LoadGrammar(new DictationGrammar()); //Carga la gramatica de Windows 
+                    voz.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(LectorDeVoz); // Controlador de eventos. Se ejecutara al reconocer 
+                    voz.RecognizeAsync(RecognizeMode.Multiple); //Iniciamos reconocimiento 
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error de audio.");
+            }
+        }
+
+        private void LectorDeVoz(object sender, SpeechRecognizedEventArgs e)
+        {
+            foreach (RecognizedWordUnit palabra in e.Result.Words)
+            {
+
+                if (palabra.Text == "carta")
+                {
+                    MessageBox.Show("Pedir");
+                }
+                else if (palabra.Text == "plantarse")
+                {
+                    MessageBox.Show("Plantarse");
+                }
             }
         }
     }

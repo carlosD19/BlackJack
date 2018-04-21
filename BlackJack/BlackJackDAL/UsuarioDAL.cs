@@ -65,7 +65,7 @@ namespace BlackJackDAL
                 long idApp = long.Parse(cmd.ExecuteScalar().ToString());
                 if (idApp > 0)
                 {
-                    string sql2 = @"select * from usuario where (email = @email and id_app = @id)";
+                    string sql2 = @"select * from usuario where (email = @email or id_app = @id)";
                     NpgsqlCommand cmd2 = new NpgsqlCommand(sql2, con);
                     cmd2.Parameters.AddWithValue("@email", usuario.Email);
                     cmd2.Parameters.AddWithValue("@id", idApp);

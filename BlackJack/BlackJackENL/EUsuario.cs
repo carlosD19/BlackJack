@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BlackJackENL
 {
     public class EUsuario
@@ -17,5 +18,7 @@ namespace BlackJackENL
         public double Dinero { get; set; }
         public double Apostado { get; set; }
         public double Ganado { get; set; }
+        public bool Aposto { get; set; }
+        public Card[] Cartas { get; set; }
     }
 }

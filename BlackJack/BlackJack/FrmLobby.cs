@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +22,7 @@ namespace BlackJack
         private List<string> copia;
         private List<EUsuario> listaU;
         private List<EMesa> listaM;
+        
 
         public FrmLobby()
         {
@@ -57,7 +59,7 @@ namespace BlackJack
             listaU = uBOL.CargarTodo();
             for (int i = 0; i < listaU.Count; i++)
             {
-                dgvUsuario.Rows.Add(listaU[i].Nombre, listaU[i].Email,listaU[i].Id);
+                dgvUsuario.Rows.Add(listaU[i].Nombre, listaU[i].Email, listaU[i].Id);
             }
             if (usuario != null)
             {
@@ -65,6 +67,17 @@ namespace BlackJack
                 lblApe.Text = usuario.Apellido;
                 lblEmail.Text = usuario.Email;
                 pbImagen.Load(usuario.Imagen);
+                //Image img;
+                //WebRequest request = WebRequest.Create(usuario.Imagen);
+                //using (var response = request.GetResponse())
+                //{
+                //    using (var str = response.GetResponseStream())
+                //    {
+                //        img = Bitmap.FromStream(str);
+                //        pbImagen.Image = img;
+                //    }
+                //}
+
             }
             dgvMesa.DataSource = listaM;
         }
@@ -170,11 +183,48 @@ namespace BlackJack
                 EnviarGmail();
                 lblError.Text = "Correo Enviado.";
                 panel2.Visible = false;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 lblError.Text = ex.Message;
             }
 
+        }
+
+        private void dgvMesa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                int row = e.RowIndex;
+
+                if (row >= 0)
+                {
+                    mesa = dgvMesa.CurrentRow.DataBoundItem as EMesa;
+                    if (mesa.Privada)
+                    {
+                        panel2.Visible = true;
+                    }
+                    else
+                    {
+                        FrmJuego frm = new FrmJuego(usuario, mesa);
+                        frm.Show();
+                        frm.Owner = this;
+                        Hide();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                lblError.Text = "Error al seleccionar mesa.";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmJuego frm = new FrmJuego(usuario, mesa);
+            frm.Show();
+            frm.Owner = this;
+            Hide();
         }
     }
 }

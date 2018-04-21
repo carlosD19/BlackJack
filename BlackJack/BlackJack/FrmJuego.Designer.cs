@@ -50,6 +50,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnPedir = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnMicrofono = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb25)).BeginInit();
@@ -70,7 +72,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.Location = new System.Drawing.Point(242, 415);
+            this.panel2.Location = new System.Drawing.Point(246, 414);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(185, 154);
             this.panel2.TabIndex = 1;
@@ -78,7 +80,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.Location = new System.Drawing.Point(455, 452);
+            this.panel3.Location = new System.Drawing.Point(463, 452);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(185, 154);
             this.panel3.TabIndex = 2;
@@ -86,7 +88,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
-            this.panel4.Location = new System.Drawing.Point(668, 452);
+            this.panel4.Location = new System.Drawing.Point(678, 452);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(185, 154);
             this.panel4.TabIndex = 3;
@@ -94,7 +96,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Transparent;
-            this.panel5.Location = new System.Drawing.Point(878, 414);
+            this.panel5.Location = new System.Drawing.Point(899, 414);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(185, 155);
             this.panel5.TabIndex = 3;
@@ -102,7 +104,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Transparent;
-            this.panel6.Location = new System.Drawing.Point(1090, 346);
+            this.panel6.Location = new System.Drawing.Point(1115, 346);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(183, 159);
             this.panel6.TabIndex = 4;
@@ -110,7 +112,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Transparent;
-            this.panel7.Location = new System.Drawing.Point(115, 156);
+            this.panel7.Location = new System.Drawing.Point(119, 158);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(49, 165);
             this.panel7.TabIndex = 5;
@@ -118,7 +120,7 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.Transparent;
-            this.panel8.Location = new System.Drawing.Point(326, 220);
+            this.panel8.Location = new System.Drawing.Point(336, 222);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(49, 165);
             this.panel8.TabIndex = 6;
@@ -126,31 +128,31 @@
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.Transparent;
-            this.panel9.Location = new System.Drawing.Point(539, 255);
+            this.panel9.Location = new System.Drawing.Point(552, 257);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(49, 165);
+            this.panel9.Size = new System.Drawing.Size(51, 165);
             this.panel9.TabIndex = 7;
             // 
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.Transparent;
-            this.panel10.Location = new System.Drawing.Point(752, 255);
+            this.panel10.Location = new System.Drawing.Point(771, 257);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(49, 165);
+            this.panel10.Size = new System.Drawing.Size(51, 165);
             this.panel10.TabIndex = 8;
             // 
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.Transparent;
-            this.panel11.Location = new System.Drawing.Point(962, 220);
+            this.panel11.Location = new System.Drawing.Point(984, 222);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(49, 165);
+            this.panel11.Size = new System.Drawing.Size(50, 165);
             this.panel11.TabIndex = 9;
             // 
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.Transparent;
-            this.panel12.Location = new System.Drawing.Point(1172, 156);
+            this.panel12.Location = new System.Drawing.Point(1203, 158);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(49, 165);
             this.panel12.TabIndex = 10;
@@ -216,7 +218,7 @@
             this.panel13.Controls.Add(this.pictureBox1);
             this.panel13.Location = new System.Drawing.Point(941, 12);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(101, 143);
+            this.panel13.Size = new System.Drawing.Size(80, 140);
             this.panel13.TabIndex = 16;
             // 
             // pictureBox1
@@ -225,7 +227,7 @@
             this.pictureBox1.Image = global::BlackJack.Properties.Resources.card;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(101, 143);
+            this.pictureBox1.Size = new System.Drawing.Size(80, 140);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -236,13 +238,45 @@
             // 
             // btnPedir
             // 
-            this.btnPedir.Location = new System.Drawing.Point(495, 645);
+            this.btnPedir.BackColor = System.Drawing.Color.DarkBlue;
+            this.btnPedir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPedir.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPedir.ForeColor = System.Drawing.Color.White;
+            this.btnPedir.Location = new System.Drawing.Point(534, 647);
             this.btnPedir.Name = "btnPedir";
-            this.btnPedir.Size = new System.Drawing.Size(75, 23);
+            this.btnPedir.Size = new System.Drawing.Size(102, 30);
             this.btnPedir.TabIndex = 17;
             this.btnPedir.Text = "Pedir";
-            this.btnPedir.UseVisualStyleBackColor = true;
+            this.btnPedir.UseVisualStyleBackColor = false;
             this.btnPedir.Click += new System.EventHandler(this.btnPedir_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(660, 647);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 30);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Plantarse";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // btnMicrofono
+            // 
+            this.btnMicrofono.BackColor = System.Drawing.Color.Transparent;
+            this.btnMicrofono.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnMicrofono.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnMicrofono.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnMicrofono.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMicrofono.Image = global::BlackJack.Properties.Resources.nomicro;
+            this.btnMicrofono.Location = new System.Drawing.Point(336, 625);
+            this.btnMicrofono.Name = "btnMicrofono";
+            this.btnMicrofono.Size = new System.Drawing.Size(37, 52);
+            this.btnMicrofono.TabIndex = 19;
+            this.btnMicrofono.UseVisualStyleBackColor = false;
+            this.btnMicrofono.Click += new System.EventHandler(this.btnMicrofono_Click);
             // 
             // FrmJuego
             // 
@@ -251,6 +285,8 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.mesa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1290, 689);
+            this.Controls.Add(this.btnMicrofono);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnPedir);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.pb100);
@@ -272,6 +308,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FrmJuego";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmJuego_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb5)).EndInit();
@@ -307,6 +344,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnPedir;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMicrofono;
     }
 }
 

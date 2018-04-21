@@ -16,7 +16,7 @@ namespace BlackJack
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmLobby());
+            Application.Run(new FrmJuego());
         }
     }
 }

@@ -63,5 +63,25 @@ namespace BlackJackBOL
         {
             return dal.Cargar();
         }
+
+        public EMesa BuscarPublica(EUsuario usuario, EMesa mesa, string pass)
+        {
+            return dal.Unirse(usuario, mesa, pass);
+        }
+
+        public EMesa CargarPartida(EMesa mesa)
+        {
+            return dal.CargarPartidaID(mesa.Id);
+        }
+
+        public void Plantarse(EMesa mesa)
+        {
+            dal.Actualizar(mesa);
+        }
+
+        public void Salir(int id)
+        {
+            dal.SalirPartida(id);
+        }
     }
 }

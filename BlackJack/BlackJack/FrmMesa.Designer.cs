@@ -36,7 +36,6 @@
             this.txtPass = new System.Windows.Forms.TextBox();
             this.txtRePass = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbPrivada = new System.Windows.Forms.CheckBox();
             this.txtCapacidad = new System.Windows.Forms.NumericUpDown();
             this.dgvMesa = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,6 +102,7 @@
             this.txtPass.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPass.Location = new System.Drawing.Point(127, 247);
             this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(218, 26);
             this.txtPass.TabIndex = 7;
             // 
@@ -111,6 +111,7 @@
             this.txtRePass.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRePass.Location = new System.Drawing.Point(127, 310);
             this.txtRePass.Name = "txtRePass";
+            this.txtRePass.PasswordChar = '*';
             this.txtRePass.Size = new System.Drawing.Size(218, 26);
             this.txtRePass.TabIndex = 9;
             // 
@@ -125,20 +126,6 @@
             this.label5.Size = new System.Drawing.Size(118, 18);
             this.label5.TabIndex = 8;
             this.label5.Text = "Re-Contraseña:";
-            // 
-            // cbPrivada
-            // 
-            this.cbPrivada.AutoSize = true;
-            this.cbPrivada.BackColor = System.Drawing.Color.Transparent;
-            this.cbPrivada.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPrivada.ForeColor = System.Drawing.Color.DarkGray;
-            this.cbPrivada.Location = new System.Drawing.Point(127, 93);
-            this.cbPrivada.Name = "cbPrivada";
-            this.cbPrivada.Size = new System.Drawing.Size(81, 22);
-            this.cbPrivada.TabIndex = 10;
-            this.cbPrivada.Text = "Privada";
-            this.cbPrivada.UseVisualStyleBackColor = false;
-            this.cbPrivada.CheckedChanged += new System.EventHandler(this.cbPrivada_CheckedChanged);
             // 
             // txtCapacidad
             // 
@@ -165,6 +152,7 @@
             // 
             // dgvMesa
             // 
+            this.dgvMesa.AllowUserToAddRows = false;
             this.dgvMesa.AutoGenerateColumns = false;
             this.dgvMesa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMesa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -176,9 +164,9 @@
             this.jugadorActDataGridViewTextBoxColumn,
             this.contadorJugDataGridViewTextBoxColumn});
             this.dgvMesa.DataSource = this.eMesaBindingSource;
-            this.dgvMesa.Location = new System.Drawing.Point(363, 93);
+            this.dgvMesa.Location = new System.Drawing.Point(363, 121);
             this.dgvMesa.Name = "dgvMesa";
-            this.dgvMesa.Size = new System.Drawing.Size(414, 244);
+            this.dgvMesa.Size = new System.Drawing.Size(414, 216);
             this.dgvMesa.TabIndex = 12;
             this.dgvMesa.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMesa_CellMouseClick);
             // 
@@ -264,7 +252,6 @@
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.dgvMesa);
             this.Controls.Add(this.txtCapacidad);
-            this.Controls.Add(this.cbPrivada);
             this.Controls.Add(this.txtRePass);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtPass);
@@ -293,7 +280,6 @@
         private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.TextBox txtRePass;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox cbPrivada;
         private System.Windows.Forms.NumericUpDown txtCapacidad;
         private System.Windows.Forms.DataGridView dgvMesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
