@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.cartas1 = new System.Windows.Forms.Panel();
+            this.cartas2 = new System.Windows.Forms.Panel();
+            this.cartas3 = new System.Windows.Forms.Panel();
+            this.cartas4 = new System.Windows.Forms.Panel();
+            this.cartas5 = new System.Windows.Forms.Panel();
+            this.cartas6 = new System.Windows.Forms.Panel();
+            this.fichas1 = new System.Windows.Forms.Panel();
+            this.fichas2 = new System.Windows.Forms.Panel();
+            this.fichas3 = new System.Windows.Forms.Panel();
+            this.fichas4 = new System.Windows.Forms.Panel();
+            this.fichas5 = new System.Windows.Forms.Panel();
+            this.fichas6 = new System.Windows.Forms.Panel();
             this.pb1 = new System.Windows.Forms.PictureBox();
             this.pb5 = new System.Windows.Forms.PictureBox();
             this.pb25 = new System.Windows.Forms.PictureBox();
@@ -52,6 +52,9 @@
             this.btnPedir = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnMicrofono = new System.Windows.Forms.Button();
+            this.cartas7 = new System.Windows.Forms.Panel();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.tmAct = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb25)).BeginInit();
@@ -61,101 +64,101 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // cartas1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Location = new System.Drawing.Point(31, 351);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(185, 154);
-            this.panel1.TabIndex = 0;
+            this.cartas1.BackColor = System.Drawing.Color.Transparent;
+            this.cartas1.Location = new System.Drawing.Point(31, 351);
+            this.cartas1.Name = "cartas1";
+            this.cartas1.Size = new System.Drawing.Size(185, 154);
+            this.cartas1.TabIndex = 0;
             // 
-            // panel2
+            // cartas2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.Location = new System.Drawing.Point(246, 414);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(185, 154);
-            this.panel2.TabIndex = 1;
+            this.cartas2.BackColor = System.Drawing.Color.Transparent;
+            this.cartas2.Location = new System.Drawing.Point(246, 414);
+            this.cartas2.Name = "cartas2";
+            this.cartas2.Size = new System.Drawing.Size(185, 154);
+            this.cartas2.TabIndex = 1;
             // 
-            // panel3
+            // cartas3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.Location = new System.Drawing.Point(463, 452);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(185, 154);
-            this.panel3.TabIndex = 2;
+            this.cartas3.BackColor = System.Drawing.Color.Transparent;
+            this.cartas3.Location = new System.Drawing.Point(463, 452);
+            this.cartas3.Name = "cartas3";
+            this.cartas3.Size = new System.Drawing.Size(185, 154);
+            this.cartas3.TabIndex = 2;
             // 
-            // panel4
+            // cartas4
             // 
-            this.panel4.BackColor = System.Drawing.Color.Transparent;
-            this.panel4.Location = new System.Drawing.Point(678, 452);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(185, 154);
-            this.panel4.TabIndex = 3;
+            this.cartas4.BackColor = System.Drawing.Color.Transparent;
+            this.cartas4.Location = new System.Drawing.Point(678, 452);
+            this.cartas4.Name = "cartas4";
+            this.cartas4.Size = new System.Drawing.Size(185, 154);
+            this.cartas4.TabIndex = 3;
             // 
-            // panel5
+            // cartas5
             // 
-            this.panel5.BackColor = System.Drawing.Color.Transparent;
-            this.panel5.Location = new System.Drawing.Point(899, 414);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(185, 155);
-            this.panel5.TabIndex = 3;
+            this.cartas5.BackColor = System.Drawing.Color.Transparent;
+            this.cartas5.Location = new System.Drawing.Point(899, 414);
+            this.cartas5.Name = "cartas5";
+            this.cartas5.Size = new System.Drawing.Size(185, 154);
+            this.cartas5.TabIndex = 3;
             // 
-            // panel6
+            // cartas6
             // 
-            this.panel6.BackColor = System.Drawing.Color.Transparent;
-            this.panel6.Location = new System.Drawing.Point(1115, 346);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(183, 159);
-            this.panel6.TabIndex = 4;
+            this.cartas6.BackColor = System.Drawing.Color.Transparent;
+            this.cartas6.Location = new System.Drawing.Point(1115, 346);
+            this.cartas6.Name = "cartas6";
+            this.cartas6.Size = new System.Drawing.Size(185, 154);
+            this.cartas6.TabIndex = 4;
             // 
-            // panel7
+            // fichas1
             // 
-            this.panel7.BackColor = System.Drawing.Color.Transparent;
-            this.panel7.Location = new System.Drawing.Point(119, 158);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(49, 165);
-            this.panel7.TabIndex = 5;
+            this.fichas1.BackColor = System.Drawing.Color.Transparent;
+            this.fichas1.Location = new System.Drawing.Point(119, 158);
+            this.fichas1.Name = "fichas1";
+            this.fichas1.Size = new System.Drawing.Size(49, 165);
+            this.fichas1.TabIndex = 5;
             // 
-            // panel8
+            // fichas2
             // 
-            this.panel8.BackColor = System.Drawing.Color.Transparent;
-            this.panel8.Location = new System.Drawing.Point(336, 222);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(49, 165);
-            this.panel8.TabIndex = 6;
+            this.fichas2.BackColor = System.Drawing.Color.Transparent;
+            this.fichas2.Location = new System.Drawing.Point(336, 222);
+            this.fichas2.Name = "fichas2";
+            this.fichas2.Size = new System.Drawing.Size(49, 165);
+            this.fichas2.TabIndex = 6;
             // 
-            // panel9
+            // fichas3
             // 
-            this.panel9.BackColor = System.Drawing.Color.Transparent;
-            this.panel9.Location = new System.Drawing.Point(552, 257);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(51, 165);
-            this.panel9.TabIndex = 7;
+            this.fichas3.BackColor = System.Drawing.Color.Transparent;
+            this.fichas3.Location = new System.Drawing.Point(552, 257);
+            this.fichas3.Name = "fichas3";
+            this.fichas3.Size = new System.Drawing.Size(51, 165);
+            this.fichas3.TabIndex = 7;
             // 
-            // panel10
+            // fichas4
             // 
-            this.panel10.BackColor = System.Drawing.Color.Transparent;
-            this.panel10.Location = new System.Drawing.Point(771, 257);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(51, 165);
-            this.panel10.TabIndex = 8;
+            this.fichas4.BackColor = System.Drawing.Color.Transparent;
+            this.fichas4.Location = new System.Drawing.Point(771, 257);
+            this.fichas4.Name = "fichas4";
+            this.fichas4.Size = new System.Drawing.Size(51, 165);
+            this.fichas4.TabIndex = 8;
             // 
-            // panel11
+            // fichas5
             // 
-            this.panel11.BackColor = System.Drawing.Color.Transparent;
-            this.panel11.Location = new System.Drawing.Point(984, 222);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(50, 165);
-            this.panel11.TabIndex = 9;
+            this.fichas5.BackColor = System.Drawing.Color.Transparent;
+            this.fichas5.Location = new System.Drawing.Point(984, 222);
+            this.fichas5.Name = "fichas5";
+            this.fichas5.Size = new System.Drawing.Size(50, 165);
+            this.fichas5.TabIndex = 9;
             // 
-            // panel12
+            // fichas6
             // 
-            this.panel12.BackColor = System.Drawing.Color.Transparent;
-            this.panel12.Location = new System.Drawing.Point(1203, 158);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(49, 165);
-            this.panel12.TabIndex = 10;
+            this.fichas6.BackColor = System.Drawing.Color.Transparent;
+            this.fichas6.Location = new System.Drawing.Point(1203, 158);
+            this.fichas6.Name = "fichas6";
+            this.fichas6.Size = new System.Drawing.Size(49, 165);
+            this.fichas6.TabIndex = 10;
             // 
             // pb1
             // 
@@ -278,6 +281,28 @@
             this.btnMicrofono.UseVisualStyleBackColor = false;
             this.btnMicrofono.Click += new System.EventHandler(this.btnMicrofono_Click);
             // 
+            // cartas7
+            // 
+            this.cartas7.BackColor = System.Drawing.Color.Transparent;
+            this.cartas7.Location = new System.Drawing.Point(552, 40);
+            this.cartas7.Name = "cartas7";
+            this.cartas7.Size = new System.Drawing.Size(185, 154);
+            this.cartas7.TabIndex = 20;
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(312, 138);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(35, 13);
+            this.lblEstado.TabIndex = 21;
+            this.lblEstado.Text = "label1";
+            // 
+            // tmAct
+            // 
+            this.tmAct.Enabled = true;
+            this.tmAct.Tick += new System.EventHandler(this.tmAct_Tick);
+            // 
             // FrmJuego
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,6 +310,8 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.mesa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1290, 689);
+            this.Controls.Add(this.lblEstado);
+            this.Controls.Add(this.cartas7);
             this.Controls.Add(this.btnMicrofono);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnPedir);
@@ -294,18 +321,18 @@
             this.Controls.Add(this.pb25);
             this.Controls.Add(this.pb5);
             this.Controls.Add(this.pb1);
-            this.Controls.Add(this.panel12);
-            this.Controls.Add(this.panel11);
-            this.Controls.Add(this.panel10);
-            this.Controls.Add(this.panel9);
-            this.Controls.Add(this.panel8);
-            this.Controls.Add(this.panel7);
-            this.Controls.Add(this.panel6);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.fichas6);
+            this.Controls.Add(this.fichas5);
+            this.Controls.Add(this.fichas4);
+            this.Controls.Add(this.fichas3);
+            this.Controls.Add(this.fichas2);
+            this.Controls.Add(this.fichas1);
+            this.Controls.Add(this.cartas6);
+            this.Controls.Add(this.cartas5);
+            this.Controls.Add(this.cartas4);
+            this.Controls.Add(this.cartas3);
+            this.Controls.Add(this.cartas2);
+            this.Controls.Add(this.cartas1);
             this.Name = "FrmJuego";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmJuego_FormClosing);
@@ -318,23 +345,24 @@
             this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel cartas1;
+        private System.Windows.Forms.Panel cartas2;
+        private System.Windows.Forms.Panel cartas3;
+        private System.Windows.Forms.Panel cartas4;
+        private System.Windows.Forms.Panel cartas5;
+        private System.Windows.Forms.Panel cartas6;
+        private System.Windows.Forms.Panel fichas1;
+        private System.Windows.Forms.Panel fichas2;
+        private System.Windows.Forms.Panel fichas3;
+        private System.Windows.Forms.Panel fichas4;
+        private System.Windows.Forms.Panel fichas5;
+        private System.Windows.Forms.Panel fichas6;
         private System.Windows.Forms.PictureBox pb1;
         private System.Windows.Forms.PictureBox pb5;
         private System.Windows.Forms.PictureBox pb25;
@@ -346,6 +374,9 @@
         private System.Windows.Forms.Button btnPedir;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnMicrofono;
+        private System.Windows.Forms.Panel cartas7;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.Timer tmAct;
     }
 }
 

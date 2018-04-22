@@ -16,5 +16,7 @@ namespace BlackJackENL
         public double Ganado { get; set; }
         public bool Aposto { get; set; }
         public List<string> Cartas { get; set; }
+        public List<string> Fichas { get; set; }
+        public int Turno { get; set; }
     }
 }

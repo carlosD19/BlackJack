@@ -61,7 +61,7 @@ namespace BlackJackBOL
             return dal.Cargar();
         }
 
-        public EMesa BuscarPublica(EUsuario usuario, EMesa mesa, string pass)
+        public EMesa BuscarMesa(EUsuario usuario, EMesa mesa, string pass)
         {
             return dal.Unirse(usuario, mesa, pass);
         }

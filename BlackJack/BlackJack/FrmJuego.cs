@@ -1,28 +1,27 @@
 ﻿using BlackJackENL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using BlackJackBOL;
+using System.Collections.Generic;
 
 namespace BlackJack
 {
     public partial class FrmJuego : Form
     {
+        private int xJ1;
         private int yJ1;
         private int x;
         private int y;
         private int xRes;
         private int yRes;
-        private Point point;
-        private int xJ1;
-        private EUsuario usuario;
         private bool bus;
+        private Point point;
+        private EUsuario usuario;
+        private EMesa mesa;
+        private MesaBOL mBOL;
+        private List<EUsuario> usuJugando;
         private SpeechRecognitionEngine voz;
 
         public FrmJuego()
@@ -30,10 +29,12 @@ namespace BlackJack
             InitializeComponent();
             CenterToScreen();
         }
+
         public FrmJuego(EUsuario u, EMesa mesa)
         {
             InitializeComponent();
             CenterToScreen();
+            this.mesa = mesa;
             usuario = u;
         }
 
@@ -42,6 +43,7 @@ namespace BlackJack
             yJ1 = 120;
             x = panel13.Location.X;
             y = panel13.Location.Y;
+            mBOL = new MesaBOL();
             point = new Point(panel13.Location.X - 3, panel13.Location.Y);
             panel13.BringToFront();
             panel13.Visible = false;
@@ -55,6 +57,7 @@ namespace BlackJack
             {
                 case "pb1":
                     DibujarFicha(pb.Image, yJ1);
+                    MessageBox.Show(pb.Image.ToString());
                     yJ1 -= 8;
                     break;
                 case "pb5":
@@ -89,7 +92,7 @@ namespace BlackJack
             gp.AddEllipse(0, 0, pb.Width - 3, pb.Height - 3);
             Region rg = new Region(gp);
             pb.Region = rg;
-            panel10.Controls.Add(pb);
+            fichas1.Controls.Add(pb);
             pb.Image = img;
             pb.BringToFront();
             pb.BackColor = Color.Transparent;
@@ -112,9 +115,9 @@ namespace BlackJack
         {
             y += yRes;
             x -= xRes;
-            if (y + 50 > panel2.Location.Y)
+            if (y + 50 > cartas2.Location.Y)
             {
-                DibujarCarta(panel4);
+                DibujarCarta(cartas7);
                 panel13.Location = point;
                 x = panel13.Location.X;
                 y = panel13.Location.Y;
@@ -129,9 +132,10 @@ namespace BlackJack
 
         private void btnPedir_Click(object sender, EventArgs e)
         {
-            ObtenerXY(4);
-            panel13.Visible = true;
-            timer1.Enabled = true;
+            mBOL.Plantarse(mesa);
+            //ObtenerXY(7);
+            //panel13.Visible = true;
+            //timer1.Enabled = true;
         }
 
         private void ObtenerXY(int p)
@@ -162,6 +166,10 @@ namespace BlackJack
                     xRes = -25;
                     yRes = 44;
                     break;
+                case 7:
+                    xRes = 40;
+                    yRes = 0;
+                    break;
                 default:
                     break;
             }
@@ -169,6 +177,8 @@ namespace BlackJack
 
         private void FrmJuego_FormClosing(object sender, FormClosingEventArgs e)
         {
+            mBOL.Salir(usuario.Id);
+            mBOL.Plantarse(mesa);
             Owner?.Show();
         }
 
@@ -204,7 +214,7 @@ namespace BlackJack
                     voz.RecognizeAsync(RecognizeMode.Multiple); //Iniciamos reconocimiento 
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("Error de audio.");
             }
@@ -224,6 +234,18 @@ namespace BlackJack
                     MessageBox.Show("Plantarse");
                 }
             }
+        }
+
+        private void tmAct_Tick(object sender, EventArgs e)
+        {
+            Refrescar();
+        }
+
+        private void Refrescar()
+        {
+            mesa = mBOL.CargarPartida(mesa);
+            lblEstado.Text = "Jugando .... " + mesa.JugadorAct;
+            btnPedir.Enabled = mesa.JugadorAct == usuario.Id;
         }
     }
 }

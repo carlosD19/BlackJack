@@ -150,7 +150,7 @@ namespace BlackJack
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 lblError.Text = "Error al seleccionar fila.";
             }

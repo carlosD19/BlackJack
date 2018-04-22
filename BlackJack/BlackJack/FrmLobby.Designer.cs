@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MesaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,16 +57,17 @@
             this.btnEnviar = new System.Windows.Forms.Button();
             this.txtCorreo = new System.Windows.Forms.RichTextBox();
             this.lblError = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.dgvMesa = new System.Windows.Forms.DataGridView();
-            this.Id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Capacidad1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Privada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPass = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnSolicitar = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.Id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Capacidad1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Privada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
@@ -290,16 +296,6 @@
             this.lblError.Size = new System.Drawing.Size(0, 18);
             this.lblError.TabIndex = 11;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(803, 448);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(42, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // dgvMesa
             // 
             this.dgvMesa.AllowUserToAddRows = false;
@@ -319,42 +315,20 @@
             this.Privada});
             this.dgvMesa.Location = new System.Drawing.Point(83, 196);
             this.dgvMesa.Name = "dgvMesa";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMesa.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvMesa.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvMesa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMesa.Size = new System.Drawing.Size(714, 275);
+            this.dgvMesa.Size = new System.Drawing.Size(714, 253);
             this.dgvMesa.TabIndex = 13;
             this.dgvMesa.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMesa_CellMouseClick);
             this.dgvMesa.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMesa_CellMouseDoubleClick);
-            // 
-            // Id1
-            // 
-            this.Id1.HeaderText = "Id";
-            this.Id1.Name = "Id1";
-            this.Id1.ReadOnly = true;
-            this.Id1.Visible = false;
-            // 
-            // Nombre1
-            // 
-            this.Nombre1.HeaderText = "Nombre";
-            this.Nombre1.Name = "Nombre1";
-            this.Nombre1.ReadOnly = true;
-            this.Nombre1.Width = 300;
-            // 
-            // Capacidad1
-            // 
-            this.Capacidad1.HeaderText = "Capacidad";
-            this.Capacidad1.Name = "Capacidad1";
-            this.Capacidad1.ReadOnly = true;
-            this.Capacidad1.Width = 200;
-            // 
-            // Privada
-            // 
-            this.Privada.HeaderText = "Privada";
-            this.Privada.Name = "Privada";
-            this.Privada.ReadOnly = true;
-            this.Privada.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Privada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Privada.Width = 180;
             // 
             // panel3
             // 
@@ -395,6 +369,62 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnSolicitar
+            // 
+            this.btnSolicitar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolicitar.Location = new System.Drawing.Point(616, 455);
+            this.btnSolicitar.Name = "btnSolicitar";
+            this.btnSolicitar.Size = new System.Drawing.Size(181, 28);
+            this.btnSolicitar.TabIndex = 15;
+            this.btnSolicitar.Text = "Solicitar Contraseña";
+            this.btnSolicitar.UseVisualStyleBackColor = true;
+            this.btnSolicitar.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // Id1
+            // 
+            this.Id1.HeaderText = "Id";
+            this.Id1.Name = "Id1";
+            this.Id1.ReadOnly = true;
+            this.Id1.Visible = false;
+            // 
+            // Nombre1
+            // 
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nombre1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Nombre1.HeaderText = "Nombre";
+            this.Nombre1.Name = "Nombre1";
+            this.Nombre1.ReadOnly = true;
+            this.Nombre1.Width = 300;
+            // 
+            // Capacidad1
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Capacidad1.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Capacidad1.HeaderText = "Capacidad";
+            this.Capacidad1.Name = "Capacidad1";
+            this.Capacidad1.ReadOnly = true;
+            this.Capacidad1.Width = 200;
+            // 
+            // Privada
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.NullValue = false;
+            this.Privada.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Privada.HeaderText = "Privada";
+            this.Privada.Name = "Privada";
+            this.Privada.ReadOnly = true;
+            this.Privada.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Privada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Privada.Width = 180;
+            // 
             // FrmLobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,9 +432,9 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.casino;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(880, 500);
+            this.Controls.Add(this.btnSolicitar);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.dgvMesa);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label1);
@@ -454,16 +484,16 @@
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.Button btnEnviar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contadorJugDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dgvMesa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Capacidad1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Privada;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnSolicitar;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Capacidad1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Privada;
     }
 }

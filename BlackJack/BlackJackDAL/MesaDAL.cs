@@ -105,7 +105,7 @@ namespace BlackJackDAL
                 con.Open();
                 //Definir la consulta
                 string sql = @"select id_jug from par_usu
-                                where id_par = @idP and orden > (select orden from par_usu where id_jug = @idJ and id_par = @idP)
+                                where id_mesa = @idP and orden > (select orden from par_usu where id_jug = @idJ and id_mesa = @idP)
                                 order by orden limit 1";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@idP", mesa.Id);
@@ -118,7 +118,7 @@ namespace BlackJackDAL
                 }
                 cmd.Parameters.Clear();
                 sql = @"select id_jug from par_usu
-                                where id_par = @idP 
+                                where id_mesa = @idP 
                                 order by orden limit 1";
                 cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@idP", mesa.Id);
@@ -133,7 +133,7 @@ namespace BlackJackDAL
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
                 con.Open();
-                string sql = @"select * from mesa where id = @id and activo = @act";
+                string sql = @"select * from mesa where id = @id and activo = @act and turno < capacidad";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@act", true);
@@ -156,7 +156,7 @@ namespace BlackJackDAL
             m.Pass = reader["pass"].ToString();
             m.Privada = Boolean.Parse(reader["privada"].ToString());
             m.JugadorAct = Int32.Parse(reader["jug_actual"].ToString());
-            m.JugadorAct = Int32.Parse(reader["turno"].ToString());
+            m.Turno = Int32.Parse(reader["turno"].ToString());
             return m;
         }
 
@@ -164,24 +164,29 @@ namespace BlackJackDAL
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
-                con.Open();
-                string sql = @"insert into par_usu(id_jug, id_mesa, turno) 
-                               values (@id,
-                                      (select id from mesa where id = @idMesa and pass = @pass), (select turno from mesa where id = @idMesa2) + 1) 
-                               returning id_mesa";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@id", usuario.Id);
-                cmd.Parameters.AddWithValue("@idMesa", mesa.Id);
-                cmd.Parameters.AddWithValue("@pass", pass);
-                cmd.Parameters.AddWithValue("@idMesa2", mesa.Id);
-                int idMesa = Convert.ToInt32(cmd.ExecuteScalar());
-                if (idMesa > 0)
+
+                EMesa mesaResult = new EMesa();
+                mesaResult = CargarPartidaID(mesa.Id);
+                if (mesaResult != null)
                 {
                     con.Close();
-                    ActualizarTurno(mesa);
-                    ActualizarMesa(idMesa, usuario.Id);
+                    con.Open();
+                    string sql = @"insert into par_usu(id_jug, id_mesa, turno) 
+                               values (@id,
+                                      (select id from mesa where id = @idMesa and pass = @pass), (select turno from mesa where id = @idMesa2) + 1)";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@id", usuario.Id);
+                    cmd.Parameters.AddWithValue("@idMesa", mesa.Id);
+                    cmd.Parameters.AddWithValue("@pass", pass);
+                    cmd.Parameters.AddWithValue("@idMesa2", mesa.Id);
+                    if (cmd.ExecuteNonQuery() > 0)
+                    {
+                        con.Close();
+                        ActualizarTurno(mesa);
+                        ActualizarMesa(mesa.Id, usuario.Id);
+                    }
                 }
-                return CargarPartidaID(idMesa);
+                return mesaResult;
             }
         }
 

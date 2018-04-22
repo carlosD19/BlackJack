@@ -28,7 +28,7 @@ namespace BlackJackDAL
                 {
                     client.Send(message);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw new Exception("Error al enviar correo.");
                 }

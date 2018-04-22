@@ -53,6 +53,7 @@ namespace BlackJack
             listaM = mBOL.CargarTodo();
             panel2.Visible = false;
             panel3.Visible = false;
+            btnSolicitar.Visible = false;
             CargarDatos();
         }
 
@@ -145,7 +146,14 @@ namespace BlackJack
                             mesa = listaM[i];
                             if (mesa.Privada)
                             {
-                                panel2.Visible = true;
+                                btnSolicitar.Visible = true;
+                            }
+                            else
+                            {
+                                btnSolicitar.Visible = false;
+                                panel2.Visible = false;
+                                copia = new List<string>();
+                                txtCorreo.Text = "";
                             }
                         }
                     }
@@ -185,6 +193,7 @@ namespace BlackJack
                 EnviarGmail();
                 lblError.Text = "Correo Enviado.";
                 txtCorreo.Text = "";
+                btnSolicitar.Visible = false;
                 panel2.Visible = false;
             }
             catch (Exception ex)
@@ -222,10 +231,19 @@ namespace BlackJack
                             }
                             else
                             {
-                                FrmJuego frm = new FrmJuego(usuario, mesa);
-                                frm.Show();
-                                frm.Owner = this;
-                                Hide();
+                                EMesa m = new EMesa();
+                                m = mBOL.BuscarMesa(usuario, mesa, "");
+                                if (m != null)
+                                {
+                                    FrmJuego frm = new FrmJuego(usuario, mesa);
+                                    frm.Show();
+                                    frm.Owner = this;
+                                    Hide();
+                                }
+                                else
+                                {
+                                    lblError.Text = "Mesa llena.";
+                                }
                             }
                         }
                     }
@@ -244,16 +262,47 @@ namespace BlackJack
                 if (mBOL.VerificarPass(txtPass.Text))
                 {
                     panel3.Visible = false;
+                    EMesa m = new EMesa();
+                    m = mBOL.BuscarMesa(usuario, mesa, txtPass.Text);
                     txtPass.Text = "";
-                    FrmJuego frm = new FrmJuego(usuario, mesa);
-                    frm.Show();
-                    frm.Owner = this;
-                    Hide();
+                    if (m != null)
+                    {
+                        FrmJuego frm = new FrmJuego(usuario, m);
+                        frm.Show();
+                        frm.Owner = this;
+                        Hide();
+                    }
+                    else
+                    {
+                        lblError.Text = "Mesa llena.";
+                    }
                 }
                 else
                 {
                     lblError.Text = "Contraseña Incorrecta.";
                 }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (mesa != null)
+            {
+                if (mesa.Privada)
+                {
+                    panel2.Visible = true;
+                }
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            listaM = mBOL.CargarTodo();
+            dgvMesa.Rows.Clear();
+            foreach (EMesa m in listaM)
+            {
+                bool privada = m.Privada;
+                dgvMesa.Rows.Add(m.Id, m.Nombre, m.Turno + "/" + m.Capacidad, privada);
             }
         }
     }
