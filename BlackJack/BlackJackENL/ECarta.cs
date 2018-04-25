@@ -1,7 +1,7 @@
 ﻿namespace BlackJackENL
 {
 
-    public class Carta
+    public class ECarta
     {
         public bool success { get; set; }
         public Card[] cards { get; set; }

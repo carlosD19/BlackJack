@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using BlackJackENL;
+using Newtonsoft.Json;
 using Npgsql;
 
 namespace BlackJackDAL
@@ -138,7 +140,6 @@ namespace BlackJackDAL
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@act", true);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-
                 if (reader.Read())
                 {
                     return CargarPartida(reader);
@@ -157,6 +158,7 @@ namespace BlackJackDAL
             m.Privada = Boolean.Parse(reader["privada"].ToString());
             m.JugadorAct = Int32.Parse(reader["jug_actual"].ToString());
             m.Turno = Int32.Parse(reader["turno"].ToString());
+            m.Deck_Id = reader["deck_id"].ToString();
             return m;
         }
 
@@ -205,10 +207,17 @@ namespace BlackJackDAL
                     con.Close();
                     if (jugActual == 0)
                     {
+                        EMazo mazo = new EMazo();
+                        string URL = @"https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
+                        string json = new WebClient().DownloadString(URL);
+                        mazo = JsonConvert.DeserializeObject<EMazo>(json);
+                        string deck_id = mazo.deck_id;
+
                         con.Open();
-                        string sql2 = @"update mesa set jug_actual = @jugAct where id = @id";
+                        string sql2 = @"update mesa set jug_actual = @jugAct, deck_id = @deck where id = @id";
                         NpgsqlCommand cmd2 = new NpgsqlCommand(sql2, con);
                         cmd2.Parameters.AddWithValue("@jugAct", idUsu);
+                        cmd2.Parameters.AddWithValue("@deck", deck_id);
                         cmd2.Parameters.AddWithValue("@id", idMesa);
                         NpgsqlDataReader reader2 = cmd2.ExecuteReader();
                     }
@@ -262,6 +271,82 @@ namespace BlackJackDAL
             mesa.Capacidad = Int32.Parse(reader["capacidad"].ToString());
             mesa.Turno = Int32.Parse(reader["turno"].ToString());
             return mesa;
+        }
+
+        public List<EUsuario> CargarJugadores(EMesa mesa)
+        {
+            List<EUsuario> lista = new List<EUsuario>();
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"SELECT * FROM usuario FULL JOIN par_usu ON par_usu.id_jug = usuario.id
+                                WHERE par_usu.id_mesa = @idMesa";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@idMesa", mesa.Id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    lista.Add(CargarUsuario(reader));
+                }
+                foreach (EUsuario u in lista)
+                {
+                    u.Cartas = CargarCartas(u.Id);
+                    u.Fichas = CargarFichas(u.Id);
+                }
+            }
+            return lista;
+        }
+
+        private List<string> CargarFichas(int id)
+        {
+            List<string> fichas = new List<string>();
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"select * from ficha_usu where id_jug = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    fichas.Add(reader["ficha"].ToString());
+                }
+            }
+            return fichas;
+        }
+
+        private List<string> CargarCartas(int id)
+        {
+            List<string> cartas = new List<string>();
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"select * from carta_usu where id_jug = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    cartas.Add(reader["carta"].ToString());
+                }
+            }
+            return cartas;
+        }
+
+        private EUsuario CargarUsuario(NpgsqlDataReader reader)
+        {
+            EUsuario usu = new EUsuario();
+            usu.Id = Convert.ToInt32(reader["id"].ToString());
+            usu.IdApp = long.Parse(reader["id_app"].ToString());
+            usu.Nombre = reader["nombre"].ToString();
+            usu.Apellido = reader["apellido"].ToString();
+            usu.Imagen = reader["imagen"].ToString();
+            usu.Apostado = Double.Parse(reader["apostado"].ToString());
+            usu.Ganado = Double.Parse(reader["ganado"].ToString());
+            usu.Dinero = Double.Parse(reader["dinero"].ToString());
+            usu.Email = reader["email"].ToString();
+            usu.Turno = Int32.Parse(reader["turno"].ToString());
+            return usu;
         }
     }
 }

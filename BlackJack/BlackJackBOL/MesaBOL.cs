@@ -85,5 +85,10 @@ namespace BlackJackBOL
         {
             return dal.VerificarP(pass);
         }
+
+        public List<EUsuario> CargarJug(EMesa mesa)
+        {
+            return dal.CargarJugadores(mesa);
+        }
     }
 }

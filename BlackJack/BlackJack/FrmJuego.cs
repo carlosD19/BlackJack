@@ -21,9 +21,12 @@ namespace BlackJack
         private EUsuario usuario;
         private EMesa mesa;
         private MesaBOL mBOL;
-        private List<EUsuario> usuJugando;
+        private List<EUsuario> jugadores;
         private SpeechRecognitionEngine voz;
-
+        private PictureBox foto;
+        private Panel cartaPanel;
+        private Panel fichaPanel;
+        private Region rg;
         public FrmJuego()
         {
             InitializeComponent();
@@ -44,10 +47,14 @@ namespace BlackJack
             x = panel13.Location.X;
             y = panel13.Location.Y;
             mBOL = new MesaBOL();
+            jugadores = new List<EUsuario>();
             point = new Point(panel13.Location.X - 3, panel13.Location.Y);
             panel13.BringToFront();
             panel13.Visible = false;
             voz = new SpeechRecognitionEngine();
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            gp.AddEllipse(0, 0, picJ1.Width - 3, picJ1.Height - 3);
+            rg = new Region(gp);
         }
 
         private void pb1_Click(object sender, EventArgs e)
@@ -132,10 +139,9 @@ namespace BlackJack
 
         private void btnPedir_Click(object sender, EventArgs e)
         {
-            mBOL.Plantarse(mesa);
-            //ObtenerXY(7);
-            //panel13.Visible = true;
-            //timer1.Enabled = true;
+            ObtenerXY(7);
+            panel13.Visible = true;
+            timer1.Enabled = true;
         }
 
         private void ObtenerXY(int p)
@@ -243,9 +249,98 @@ namespace BlackJack
 
         private void Refrescar()
         {
+            LimpiarPanel();
             mesa = mBOL.CargarPartida(mesa);
+            jugadores = mBOL.CargarJug(mesa);
+            foreach (EUsuario u in jugadores)
+            {
+                if (u.Id == usuario.Id)
+                {
+                    usuario = u;
+                }
+                AsignarPanel(u.Turno, u);
+            }
             lblEstado.Text = "Jugando .... " + mesa.JugadorAct;
+            btnPlantarse.Enabled = mesa.JugadorAct == usuario.Id;
             btnPedir.Enabled = mesa.JugadorAct == usuario.Id;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mBOL.Plantarse(mesa);
+        }
+
+        private void AsignarPanel(int turno, EUsuario usuario)
+        {
+            switch (turno)
+            {
+                case 1:
+                    foto = picJ1;
+                    cartaPanel = cartas1;
+                    fichaPanel = fichas1;
+                    foto.Load(usuario.Imagen);
+                    foto.Region = rg;
+                    break;
+                case 2:
+                    foto = picJ2;
+                    cartaPanel = cartas2;
+                    fichaPanel = fichas2;
+                    foto.Load(usuario.Imagen);
+                    foto.Region = rg;
+                    break;
+                case 3:
+                    foto = picJ3;
+                    cartaPanel = cartas3;
+                    fichaPanel = fichas3;
+                    foto.Load(usuario.Imagen);
+                    foto.Region = rg;
+                    break;
+                case 4:
+                    foto = picJ4;
+                    cartaPanel = cartas4;
+                    fichaPanel = fichas4;
+                    foto.Load(usuario.Imagen);
+                    foto.Region = rg;
+                    break;
+                case 5:
+                    foto = picJ5;
+                    cartaPanel = cartas5;
+                    fichaPanel = fichas5;
+                    foto.Load(usuario.Imagen);
+                    foto.Region = rg;
+                    break;
+                case 6:
+                    foto = picJ6;
+                    cartaPanel = cartas6;
+                    fichaPanel = fichas6;
+                    foto.Load(usuario.Imagen);
+                    foto.Region = rg;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void LimpiarPanel()
+        {
+            cartas1.Controls.Clear();
+            fichas1.Controls.Clear();
+            picJ1.Image = null;
+            cartas2.Controls.Clear();
+            fichas2.Controls.Clear();
+            picJ2.Image = null;
+            cartas3.Controls.Clear();
+            fichas3.Controls.Clear();
+            picJ3.Image = null;
+            cartas4.Controls.Clear();
+            fichas4.Controls.Clear();
+            picJ4.Image = null;
+            cartas5.Controls.Clear();
+            fichas5.Controls.Clear();
+            picJ5.Image = null;
+            cartas6.Controls.Clear();
+            fichas6.Controls.Clear();
+            picJ6.Image = null;
         }
     }
 }

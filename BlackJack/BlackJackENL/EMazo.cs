@@ -1,6 +1,6 @@
 ﻿namespace BlackJackENL
 {
-    public class Mazo
+    public class EMazo
     {
         public bool success { get; set; }
         public string deck_id { get; set; }

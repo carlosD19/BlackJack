@@ -50,11 +50,17 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnPedir = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPlantarse = new System.Windows.Forms.Button();
             this.btnMicrofono = new System.Windows.Forms.Button();
             this.cartas7 = new System.Windows.Forms.Panel();
             this.lblEstado = new System.Windows.Forms.Label();
             this.tmAct = new System.Windows.Forms.Timer(this.components);
+            this.picJ1 = new System.Windows.Forms.PictureBox();
+            this.picJ2 = new System.Windows.Forms.PictureBox();
+            this.picJ3 = new System.Windows.Forms.PictureBox();
+            this.picJ4 = new System.Windows.Forms.PictureBox();
+            this.picJ5 = new System.Windows.Forms.PictureBox();
+            this.picJ6 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb25)).BeginInit();
@@ -62,6 +68,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb100)).BeginInit();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ6)).BeginInit();
             this.SuspendLayout();
             // 
             // cartas1
@@ -253,18 +265,19 @@
             this.btnPedir.UseVisualStyleBackColor = false;
             this.btnPedir.Click += new System.EventHandler(this.btnPedir_Click);
             // 
-            // button1
+            // btnPlantarse
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(660, 647);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 30);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Plantarse";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnPlantarse.BackColor = System.Drawing.Color.DarkBlue;
+            this.btnPlantarse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPlantarse.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlantarse.ForeColor = System.Drawing.Color.White;
+            this.btnPlantarse.Location = new System.Drawing.Point(660, 647);
+            this.btnPlantarse.Name = "btnPlantarse";
+            this.btnPlantarse.Size = new System.Drawing.Size(102, 30);
+            this.btnPlantarse.TabIndex = 18;
+            this.btnPlantarse.Text = "Plantarse";
+            this.btnPlantarse.UseVisualStyleBackColor = false;
+            this.btnPlantarse.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnMicrofono
             // 
@@ -292,7 +305,7 @@
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(312, 138);
+            this.lblEstado.Location = new System.Drawing.Point(9, 9);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(35, 13);
             this.lblEstado.TabIndex = 21;
@@ -303,6 +316,60 @@
             this.tmAct.Enabled = true;
             this.tmAct.Tick += new System.EventHandler(this.tmAct_Tick);
             // 
+            // picJ1
+            // 
+            this.picJ1.BackColor = System.Drawing.Color.Transparent;
+            this.picJ1.Location = new System.Drawing.Point(31, 273);
+            this.picJ1.Name = "picJ1";
+            this.picJ1.Size = new System.Drawing.Size(52, 50);
+            this.picJ1.TabIndex = 22;
+            this.picJ1.TabStop = false;
+            // 
+            // picJ2
+            // 
+            this.picJ2.BackColor = System.Drawing.Color.Transparent;
+            this.picJ2.Location = new System.Drawing.Point(246, 337);
+            this.picJ2.Name = "picJ2";
+            this.picJ2.Size = new System.Drawing.Size(52, 50);
+            this.picJ2.TabIndex = 23;
+            this.picJ2.TabStop = false;
+            // 
+            // picJ3
+            // 
+            this.picJ3.BackColor = System.Drawing.Color.Transparent;
+            this.picJ3.Location = new System.Drawing.Point(463, 372);
+            this.picJ3.Name = "picJ3";
+            this.picJ3.Size = new System.Drawing.Size(52, 50);
+            this.picJ3.TabIndex = 24;
+            this.picJ3.TabStop = false;
+            // 
+            // picJ4
+            // 
+            this.picJ4.BackColor = System.Drawing.Color.Transparent;
+            this.picJ4.Location = new System.Drawing.Point(678, 372);
+            this.picJ4.Name = "picJ4";
+            this.picJ4.Size = new System.Drawing.Size(52, 50);
+            this.picJ4.TabIndex = 25;
+            this.picJ4.TabStop = false;
+            // 
+            // picJ5
+            // 
+            this.picJ5.BackColor = System.Drawing.Color.Transparent;
+            this.picJ5.Location = new System.Drawing.Point(899, 337);
+            this.picJ5.Name = "picJ5";
+            this.picJ5.Size = new System.Drawing.Size(52, 50);
+            this.picJ5.TabIndex = 26;
+            this.picJ5.TabStop = false;
+            // 
+            // picJ6
+            // 
+            this.picJ6.BackColor = System.Drawing.Color.Transparent;
+            this.picJ6.Location = new System.Drawing.Point(1115, 273);
+            this.picJ6.Name = "picJ6";
+            this.picJ6.Size = new System.Drawing.Size(52, 50);
+            this.picJ6.TabIndex = 27;
+            this.picJ6.TabStop = false;
+            // 
             // FrmJuego
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,10 +377,16 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.mesa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1290, 689);
+            this.Controls.Add(this.picJ6);
+            this.Controls.Add(this.picJ5);
+            this.Controls.Add(this.picJ4);
+            this.Controls.Add(this.picJ3);
+            this.Controls.Add(this.picJ2);
+            this.Controls.Add(this.picJ1);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.cartas7);
             this.Controls.Add(this.btnMicrofono);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPlantarse);
             this.Controls.Add(this.btnPedir);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.pb100);
@@ -344,6 +417,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb100)).EndInit();
             this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picJ6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -372,11 +451,17 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnPedir;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPlantarse;
         private System.Windows.Forms.Button btnMicrofono;
         private System.Windows.Forms.Panel cartas7;
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Timer tmAct;
+        private System.Windows.Forms.PictureBox picJ1;
+        private System.Windows.Forms.PictureBox picJ2;
+        private System.Windows.Forms.PictureBox picJ3;
+        private System.Windows.Forms.PictureBox picJ4;
+        private System.Windows.Forms.PictureBox picJ5;
+        private System.Windows.Forms.PictureBox picJ6;
     }
 }
 
