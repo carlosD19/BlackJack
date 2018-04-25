@@ -181,6 +181,7 @@
             this.pb1.Size = new System.Drawing.Size(55, 50);
             this.pb1.TabIndex = 11;
             this.pb1.TabStop = false;
+            this.pb1.Tag = "_1";
             this.pb1.Click += new System.EventHandler(this.pb1_Click);
             // 
             // pb5
@@ -192,6 +193,7 @@
             this.pb5.Size = new System.Drawing.Size(55, 50);
             this.pb5.TabIndex = 12;
             this.pb5.TabStop = false;
+            this.pb5.Tag = "_5";
             this.pb5.Click += new System.EventHandler(this.pb1_Click);
             // 
             // pb25
@@ -203,6 +205,7 @@
             this.pb25.Size = new System.Drawing.Size(55, 50);
             this.pb25.TabIndex = 13;
             this.pb25.TabStop = false;
+            this.pb25.Tag = "_25";
             this.pb25.Click += new System.EventHandler(this.pb1_Click);
             // 
             // pb50
@@ -214,6 +217,7 @@
             this.pb50.Size = new System.Drawing.Size(55, 50);
             this.pb50.TabIndex = 14;
             this.pb50.TabStop = false;
+            this.pb50.Tag = "_50";
             this.pb50.Click += new System.EventHandler(this.pb1_Click);
             // 
             // pb100
@@ -225,6 +229,7 @@
             this.pb100.Size = new System.Drawing.Size(55, 50);
             this.pb100.TabIndex = 15;
             this.pb100.TabStop = false;
+            this.pb100.Tag = "_100";
             this.pb100.Click += new System.EventHandler(this.pb1_Click);
             // 
             // panel13
@@ -322,6 +327,7 @@
             this.picJ1.Location = new System.Drawing.Point(31, 273);
             this.picJ1.Name = "picJ1";
             this.picJ1.Size = new System.Drawing.Size(52, 50);
+            this.picJ1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picJ1.TabIndex = 22;
             this.picJ1.TabStop = false;
             // 
@@ -331,6 +337,7 @@
             this.picJ2.Location = new System.Drawing.Point(246, 337);
             this.picJ2.Name = "picJ2";
             this.picJ2.Size = new System.Drawing.Size(52, 50);
+            this.picJ2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picJ2.TabIndex = 23;
             this.picJ2.TabStop = false;
             // 
@@ -340,6 +347,7 @@
             this.picJ3.Location = new System.Drawing.Point(463, 372);
             this.picJ3.Name = "picJ3";
             this.picJ3.Size = new System.Drawing.Size(52, 50);
+            this.picJ3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picJ3.TabIndex = 24;
             this.picJ3.TabStop = false;
             // 
@@ -349,6 +357,7 @@
             this.picJ4.Location = new System.Drawing.Point(678, 372);
             this.picJ4.Name = "picJ4";
             this.picJ4.Size = new System.Drawing.Size(52, 50);
+            this.picJ4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picJ4.TabIndex = 25;
             this.picJ4.TabStop = false;
             // 
@@ -358,6 +367,7 @@
             this.picJ5.Location = new System.Drawing.Point(899, 337);
             this.picJ5.Name = "picJ5";
             this.picJ5.Size = new System.Drawing.Size(52, 50);
+            this.picJ5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picJ5.TabIndex = 26;
             this.picJ5.TabStop = false;
             // 
@@ -367,6 +377,7 @@
             this.picJ6.Location = new System.Drawing.Point(1115, 273);
             this.picJ6.Name = "picJ6";
             this.picJ6.Size = new System.Drawing.Size(52, 50);
+            this.picJ6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picJ6.TabIndex = 27;
             this.picJ6.TabStop = false;
             // 

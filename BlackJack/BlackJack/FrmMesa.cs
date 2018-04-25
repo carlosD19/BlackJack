@@ -88,6 +88,7 @@ namespace BlackJack
                 if (bol.Agregar(mesa, rePass))
                 {
                     lblError.Text = "Mesa registrada.";
+                    CargarTabla();
                 }
                 else
                 {
@@ -105,9 +106,16 @@ namespace BlackJack
             {
                 if (mesa != null)
                 {
-                    if (bol.Modificar(mesa))
+                    EMesa temp = new EMesa();
+                    temp.Id = mesa.Id;
+                    temp.Nombre = txtNombre.Text;
+                    temp.Pass = txtPass.Text;
+                    temp.Privada = true;
+                    temp.Capacidad = (int)txtCapacidad.Value;
+                    if (bol.Modificar(temp, txtRePass.Text))
                     {
                         lblError.Text = "Mesa modificada.";
+                        CargarTabla();
                     }
                     else
                     {
@@ -129,6 +137,7 @@ namespace BlackJack
                     if (bol.Eliminar(mesa))
                     {
                         lblError.Text = "Mesa Eliminada.";
+                        CargarTabla();
                     }
                     else
                     {

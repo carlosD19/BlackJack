@@ -10,7 +10,7 @@ namespace BlackJack
 {
     public partial class FrmJuego : Form
     {
-        private int xJ1;
+        
         private int yJ1;
         private int x;
         private int y;
@@ -27,6 +27,7 @@ namespace BlackJack
         private Panel cartaPanel;
         private Panel fichaPanel;
         private Region rg;
+        private int apuesta;
         public FrmJuego()
         {
             InitializeComponent();
@@ -59,32 +60,37 @@ namespace BlackJack
 
         private void pb1_Click(object sender, EventArgs e)
         {
-            PictureBox pb = (PictureBox)sender;
-            switch (pb.Name)
+            if (!mesa.Jugando)
             {
-                case "pb1":
-                    DibujarFicha(pb.Image, yJ1);
-                    MessageBox.Show(pb.Image.ToString());
-                    yJ1 -= 8;
-                    break;
-                case "pb5":
-                    DibujarFicha(pb.Image, yJ1);
-                    yJ1 -= 8;
-                    break;
-                case "pb25":
-                    DibujarFicha(pb.Image, yJ1);
-                    yJ1 -= 8;
-                    break;
-                case "pb50":
-                    DibujarFicha(pb.Image, yJ1);
-                    yJ1 -= 8;
-                    break;
-                case "pb100":
-                    DibujarFicha(pb.Image, yJ1);
-                    yJ1 -= 8;
-                    break;
-                default:
-                    break;
+                if (mesa.JugadorAct == usuario.Id)
+                {
+                    PictureBox pb = (PictureBox)sender;
+                    switch (pb.Name)
+                    {
+                        case "pb1":
+                            apuesta += 1;
+                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            break;
+                        case "pb5":
+                            apuesta += 5;
+                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            break;
+                        case "pb25":
+                            apuesta += 25;
+                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            break;
+                        case "pb50":
+                            apuesta += 50;
+                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            break;
+                        case "pb100":
+                            apuesta += 100;
+                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
 
@@ -99,42 +105,60 @@ namespace BlackJack
             gp.AddEllipse(0, 0, pb.Width - 3, pb.Height - 3);
             Region rg = new Region(gp);
             pb.Region = rg;
-            fichas1.Controls.Add(pb);
+            fichaPanel.Controls.Add(pb);
             pb.Image = img;
             pb.BringToFront();
             pb.BackColor = Color.Transparent;
         }
 
-        private void DibujarCarta(Panel panel)
+        private void DibujarCarta(List<Card> cartas)
         {
-            PictureBox pb = new PictureBox();
-            pb.Location = new System.Drawing.Point(xJ1, 2);
-            pb.Size = new System.Drawing.Size(80, 140);
-            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb.BorderStyle = BorderStyle.None;
-            panel.Controls.Add(pb);
-            pb.Image = Properties.Resources.card;
-            pb.BringToFront();
-            xJ1 += 25;
+            int xJ1 = 0;
+            for (int i = 0; i < cartas.Count; i++)
+            {
+                PictureBox pb = new PictureBox();
+                pb.Location = new System.Drawing.Point(xJ1, 2);
+                pb.Size = new System.Drawing.Size(80, 140);
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.BorderStyle = BorderStyle.None;
+                cartaPanel.Controls.Add(pb);
+                if (usuario.Id == mesa.JugadorAct)
+                {
+                    pb.Load(cartas[i].image);
+                }
+                else
+                {
+                    if (i == 0)
+                    {
+                        pb.Load(cartas[i].image);
+                    }
+                    else
+                    {
+                        pb.Image = Properties.Resources.card;
+                    }
+                }
+                pb.BringToFront();
+                xJ1 += 25;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            y += yRes;
-            x -= xRes;
-            if (y + 50 > cartas2.Location.Y)
-            {
-                DibujarCarta(cartas7);
-                panel13.Location = point;
-                x = panel13.Location.X;
-                y = panel13.Location.Y;
-                timer1.Enabled = false;
-                panel13.Visible = false;
-            }
-            else
-            {
-                panel13.Location = new Point(x, y);
-            }
+            //y += yRes;
+            //x -= xRes;
+            //if (y + 50 > cartas2.Location.Y)
+            //{
+            //    DibujarCarta();
+            //    panel13.Location = point;
+            //    x = panel13.Location.X;
+            //    y = panel13.Location.Y;
+            //    timer1.Enabled = false;
+            //    panel13.Visible = false;
+            //}
+            //else
+            //{
+            //    panel13.Location = new Point(x, y);
+            //}
         }
 
         private void btnPedir_Click(object sender, EventArgs e)
@@ -190,17 +214,20 @@ namespace BlackJack
 
         private void btnMicrofono_Click(object sender, EventArgs e)
         {
-            if (!bus)
+            if (!mesa.Jugando)
             {
-                btnMicrofono.Image = Properties.Resources.micro;
-                Escucha();
-                bus = true;
-            }
-            else
-            {
-                btnMicrofono.Image = Properties.Resources.nomicro;
-                Escucha();
-                bus = false;
+                if (!bus)
+                {
+                    btnMicrofono.Image = Properties.Resources.micro;
+                    Escucha();
+                    bus = true;
+                }
+                else
+                {
+                    btnMicrofono.Image = Properties.Resources.nomicro;
+                    Escucha();
+                    bus = false;
+                }
             }
         }
 
@@ -263,6 +290,7 @@ namespace BlackJack
             lblEstado.Text = "Jugando .... " + mesa.JugadorAct;
             btnPlantarse.Enabled = mesa.JugadorAct == usuario.Id;
             btnPedir.Enabled = mesa.JugadorAct == usuario.Id;
+            btnMicrofono.Enabled = !mesa.Jugando;
         }
 
         private void button1_Click(object sender, EventArgs e)

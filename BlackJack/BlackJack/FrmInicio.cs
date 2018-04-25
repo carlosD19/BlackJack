@@ -75,7 +75,7 @@ namespace BlackJack
             usuario.Apellido = dict["last_name"].ToString();
             usuario.Email = dict["email"].ToString();
             string id_Usu = dict["id"].ToString();
-            string img = String.Format("https://graph.facebook.com/{0}/picture", id_Usu);
+            string img = String.Format("https://graph.facebook.com/{0}/picture?type=large", id_Usu);
             usuario.Imagen = img;
             usuario.IdApp = long.Parse(id_Usu);
             EUsuario u = new EUsuario();

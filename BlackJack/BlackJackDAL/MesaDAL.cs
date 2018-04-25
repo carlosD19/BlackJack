@@ -17,7 +17,7 @@ namespace BlackJackDAL
                 string sql = @"UPDATE mesa SET activo = @act
                                WHERE id = @id";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@act", mesa.Activo);
+                cmd.Parameters.AddWithValue("@act", false);
                 cmd.Parameters.AddWithValue("@id", mesa.Id);
                 return cmd.ExecuteNonQuery() > 0;
             }
@@ -53,6 +53,20 @@ namespace BlackJackDAL
                 cmd.Parameters.AddWithValue("@cap", mesa.Capacidad);
                 cmd.Parameters.AddWithValue("@pri", mesa.Privada);
                 return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        public void InsertarFicha(string ficha, int id)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"insert into ficha_usu(ficha, id_jug) 
+                                values(@nom, @idJ)";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@nom", ficha);
+                cmd.Parameters.AddWithValue("@idJ", id);
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -193,6 +207,7 @@ namespace BlackJackDAL
             m.Capacidad = Int32.Parse(reader["capacidad"].ToString());
             m.Pass = reader["pass"].ToString();
             m.Privada = Boolean.Parse(reader["privada"].ToString());
+            m.Jugando = Boolean.Parse(reader["jugando"].ToString());
             m.JugadorAct = Int32.Parse(reader["jug_actual"].ToString());
             m.Turno = Int32.Parse(reader["turno"].ToString());
             m.Deck_Id = reader["deck_id"].ToString();
@@ -266,9 +281,7 @@ namespace BlackJackDAL
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
-                //Abrir una conexion
                 con.Open();
-                //Definir la consulta
                 string sql = @"update mesa set turno = (select turno from mesa where id = @id) + 1 where id = @id2";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@id", mesa.Id);
@@ -302,6 +315,7 @@ namespace BlackJackDAL
             mesa.Id = Int32.Parse(reader["id"].ToString());
             mesa.Privada = Boolean.Parse(reader["privada"].ToString());
             mesa.Activo = Boolean.Parse(reader["activo"].ToString());
+            mesa.Jugando = Boolean.Parse(reader["jugando"].ToString());
             mesa.Pass = reader["pass"].ToString();
             mesa.Nombre = reader["nombre"].ToString();
             mesa.JugadorAct = Int32.Parse(reader["jug_actual"].ToString());
@@ -352,9 +366,9 @@ namespace BlackJackDAL
             return fichas;
         }
 
-        private List<string> CargarCartas(int id)
+        private List<Card> CargarCartas(int id)
         {
-            List<string> cartas = new List<string>();
+            List<Card> cartas = new List<Card>();
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
                 con.Open();
@@ -364,7 +378,10 @@ namespace BlackJackDAL
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    cartas.Add(reader["carta"].ToString());
+                    Card c = new Card();
+                    c.image = reader["carta"].ToString();
+                    c.value = reader["valor"].ToString();
+                    cartas.Add(c);
                 }
             }
             return cartas;
@@ -383,6 +400,7 @@ namespace BlackJackDAL
             usu.Dinero = Double.Parse(reader["dinero"].ToString());
             usu.Email = reader["email"].ToString();
             usu.Turno = Int32.Parse(reader["turno"].ToString());
+            usu.Aposto = Boolean.Parse(reader["aposto"].ToString());
             return usu;
         }
     }

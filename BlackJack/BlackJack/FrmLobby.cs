@@ -69,7 +69,7 @@ namespace BlackJack
                 lblNom.Text = usuario.Nombre;
                 lblApe.Text = usuario.Apellido;
                 lblEmail.Text = usuario.Email;
-                pbImagen.Load(usuario.Imagen);
+                pbImagen.ImageLocation = usuario.Imagen;
             }
             foreach (EMesa m in listaM)
             {

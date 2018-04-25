@@ -37,17 +37,19 @@
             this.txtRePass = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCapacidad = new System.Windows.Forms.NumericUpDown();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.lblError = new System.Windows.Forms.Label();
             this.dgvMesa = new System.Windows.Forms.DataGridView();
+            this.eMesaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.capacidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.privadaDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.activoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.passDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jugadorActDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contadorJugDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eMesaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.lblError = new System.Windows.Forms.Label();
+            this.turnoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deckIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.txtCapacidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMesa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eMesaBindingSource)).BeginInit();
@@ -150,77 +152,6 @@
             0,
             0});
             // 
-            // dgvMesa
-            // 
-            this.dgvMesa.AllowUserToAddRows = false;
-            this.dgvMesa.AutoGenerateColumns = false;
-            this.dgvMesa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMesa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.nombreDataGridViewTextBoxColumn,
-            this.capacidadDataGridViewTextBoxColumn,
-            this.passDataGridViewTextBoxColumn,
-            this.privadaDataGridViewCheckBoxColumn,
-            this.jugadorActDataGridViewTextBoxColumn,
-            this.contadorJugDataGridViewTextBoxColumn});
-            this.dgvMesa.DataSource = this.eMesaBindingSource;
-            this.dgvMesa.Location = new System.Drawing.Point(363, 121);
-            this.dgvMesa.Name = "dgvMesa";
-            this.dgvMesa.Size = new System.Drawing.Size(414, 216);
-            this.dgvMesa.TabIndex = 12;
-            this.dgvMesa.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMesa_CellMouseClick);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            this.nombreDataGridViewTextBoxColumn.Width = 171;
-            // 
-            // capacidadDataGridViewTextBoxColumn
-            // 
-            this.capacidadDataGridViewTextBoxColumn.DataPropertyName = "Capacidad";
-            this.capacidadDataGridViewTextBoxColumn.HeaderText = "Capacidad";
-            this.capacidadDataGridViewTextBoxColumn.Name = "capacidadDataGridViewTextBoxColumn";
-            // 
-            // passDataGridViewTextBoxColumn
-            // 
-            this.passDataGridViewTextBoxColumn.DataPropertyName = "Pass";
-            this.passDataGridViewTextBoxColumn.HeaderText = "Pass";
-            this.passDataGridViewTextBoxColumn.Name = "passDataGridViewTextBoxColumn";
-            this.passDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // privadaDataGridViewCheckBoxColumn
-            // 
-            this.privadaDataGridViewCheckBoxColumn.DataPropertyName = "Privada";
-            this.privadaDataGridViewCheckBoxColumn.HeaderText = "Privada";
-            this.privadaDataGridViewCheckBoxColumn.Name = "privadaDataGridViewCheckBoxColumn";
-            // 
-            // jugadorActDataGridViewTextBoxColumn
-            // 
-            this.jugadorActDataGridViewTextBoxColumn.DataPropertyName = "JugadorAct";
-            this.jugadorActDataGridViewTextBoxColumn.HeaderText = "JugadorAct";
-            this.jugadorActDataGridViewTextBoxColumn.Name = "jugadorActDataGridViewTextBoxColumn";
-            this.jugadorActDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // contadorJugDataGridViewTextBoxColumn
-            // 
-            this.contadorJugDataGridViewTextBoxColumn.DataPropertyName = "ContadorJug";
-            this.contadorJugDataGridViewTextBoxColumn.HeaderText = "ContadorJug";
-            this.contadorJugDataGridViewTextBoxColumn.Name = "contadorJugDataGridViewTextBoxColumn";
-            this.contadorJugDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // eMesaBindingSource
-            // 
-            this.eMesaBindingSource.DataSource = typeof(BlackJackENL.EMesa);
-            // 
             // btnAceptar
             // 
             this.btnAceptar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -235,6 +166,7 @@
             // lblError
             // 
             this.lblError.AutoSize = true;
+            this.lblError.BackColor = System.Drawing.Color.Transparent;
             this.lblError.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblError.ForeColor = System.Drawing.Color.White;
             this.lblError.Location = new System.Drawing.Point(6, 425);
@@ -242,15 +174,106 @@
             this.lblError.Size = new System.Drawing.Size(0, 18);
             this.lblError.TabIndex = 14;
             // 
+            // dgvMesa
+            // 
+            this.dgvMesa.AutoGenerateColumns = false;
+            this.dgvMesa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMesa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.nombreDataGridViewTextBoxColumn,
+            this.capacidadDataGridViewTextBoxColumn,
+            this.privadaDataGridViewCheckBoxColumn,
+            this.activoDataGridViewCheckBoxColumn,
+            this.passDataGridViewTextBoxColumn,
+            this.jugadorActDataGridViewTextBoxColumn,
+            this.turnoDataGridViewTextBoxColumn,
+            this.deckIdDataGridViewTextBoxColumn});
+            this.dgvMesa.DataSource = this.eMesaBindingSource;
+            this.dgvMesa.Location = new System.Drawing.Point(351, 121);
+            this.dgvMesa.Name = "dgvMesa";
+            this.dgvMesa.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvMesa.Size = new System.Drawing.Size(437, 215);
+            this.dgvMesa.TabIndex = 15;
+            this.dgvMesa.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMesa_CellMouseClick);
+            // 
+            // eMesaBindingSource
+            // 
+            this.eMesaBindingSource.DataSource = typeof(BlackJackENL.EMesa);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nombreDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // capacidadDataGridViewTextBoxColumn
+            // 
+            this.capacidadDataGridViewTextBoxColumn.DataPropertyName = "Capacidad";
+            this.capacidadDataGridViewTextBoxColumn.HeaderText = "Capacidad";
+            this.capacidadDataGridViewTextBoxColumn.Name = "capacidadDataGridViewTextBoxColumn";
+            this.capacidadDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // privadaDataGridViewCheckBoxColumn
+            // 
+            this.privadaDataGridViewCheckBoxColumn.DataPropertyName = "Privada";
+            this.privadaDataGridViewCheckBoxColumn.HeaderText = "Privada";
+            this.privadaDataGridViewCheckBoxColumn.Name = "privadaDataGridViewCheckBoxColumn";
+            this.privadaDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // activoDataGridViewCheckBoxColumn
+            // 
+            this.activoDataGridViewCheckBoxColumn.DataPropertyName = "Activo";
+            this.activoDataGridViewCheckBoxColumn.HeaderText = "Activo";
+            this.activoDataGridViewCheckBoxColumn.Name = "activoDataGridViewCheckBoxColumn";
+            this.activoDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.activoDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // passDataGridViewTextBoxColumn
+            // 
+            this.passDataGridViewTextBoxColumn.DataPropertyName = "Pass";
+            this.passDataGridViewTextBoxColumn.HeaderText = "Pass";
+            this.passDataGridViewTextBoxColumn.Name = "passDataGridViewTextBoxColumn";
+            this.passDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // jugadorActDataGridViewTextBoxColumn
+            // 
+            this.jugadorActDataGridViewTextBoxColumn.DataPropertyName = "JugadorAct";
+            this.jugadorActDataGridViewTextBoxColumn.HeaderText = "JugadorAct";
+            this.jugadorActDataGridViewTextBoxColumn.Name = "jugadorActDataGridViewTextBoxColumn";
+            this.jugadorActDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // turnoDataGridViewTextBoxColumn
+            // 
+            this.turnoDataGridViewTextBoxColumn.DataPropertyName = "Turno";
+            this.turnoDataGridViewTextBoxColumn.HeaderText = "Turno";
+            this.turnoDataGridViewTextBoxColumn.Name = "turnoDataGridViewTextBoxColumn";
+            this.turnoDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // deckIdDataGridViewTextBoxColumn
+            // 
+            this.deckIdDataGridViewTextBoxColumn.DataPropertyName = "Deck_Id";
+            this.deckIdDataGridViewTextBoxColumn.HeaderText = "Deck_Id";
+            this.deckIdDataGridViewTextBoxColumn.Name = "deckIdDataGridViewTextBoxColumn";
+            this.deckIdDataGridViewTextBoxColumn.Visible = false;
+            // 
             // FrmMesa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BlackJack.Properties.Resources.inicio;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dgvMesa);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.dgvMesa);
             this.Controls.Add(this.txtCapacidad);
             this.Controls.Add(this.txtRePass);
             this.Controls.Add(this.label5);
@@ -281,16 +304,18 @@
         private System.Windows.Forms.TextBox txtRePass;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown txtCapacidad;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.DataGridView dgvMesa;
+        private System.Windows.Forms.BindingSource eMesaBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn capacidadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn passDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn privadaDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn activoDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn passDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn jugadorActDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contadorJugDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource eMesaBindingSource;
-        private System.Windows.Forms.Button btnAceptar;
-        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.DataGridViewTextBoxColumn turnoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn deckIdDataGridViewTextBoxColumn;
     }
 }
