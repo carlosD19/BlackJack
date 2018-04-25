@@ -70,17 +70,54 @@ namespace BlackJackDAL
             }
         }
 
-        public void SalirPartida(int id)
+        public void SalirPartida(int id, int mesaId)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
-                //Abrir una conexion
                 con.Open();
-                //Definir la consulta
+                List<int> usuJug = new List<int>();
+                string sql1 = @"select * from par_usu where id_mesa = @mesa and orden > 
+                              (select orden from par_usu where id_jug = @id and id_mesa = @mesa2)
+                              order by orden";
+                NpgsqlCommand cmd1 = new NpgsqlCommand(sql1, con);
+                cmd1.Parameters.AddWithValue("@mesa", mesaId);
+                cmd1.Parameters.AddWithValue("@id", id);
+                cmd1.Parameters.AddWithValue("@mesa2", mesaId);
+                NpgsqlDataReader reader = cmd1.ExecuteReader();
+                while (reader.Read())
+                {
+                    usuJug.Add(Int32.Parse(reader["id"].ToString()));
+                }
+                con.Close();
+                con.Open();
                 string sql = @"delete from par_usu where id_jug = @idUsu";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@idUsu", id);
                 cmd.ExecuteNonQuery();
+                con.Close();
+                for (int i = 0; i < usuJug.Count; i++)
+                {
+                    con.Open();
+                    string sql2 = @"UPDATE par_usu SET turno = turno-1 WHERE id = @id";
+                    NpgsqlCommand cmd2 = new NpgsqlCommand(sql2, con);
+                    cmd2.Parameters.AddWithValue("@id", usuJug[i]);
+                    cmd2.ExecuteNonQuery();
+                    con.Close();
+                }
+                con.Open();
+                string sql3 = @"UPDATE mesa SET turno = turno-1 WHERE id = @id returning turno";
+                NpgsqlCommand cmd3 = new NpgsqlCommand(sql3, con);
+                cmd3.Parameters.AddWithValue("@id", mesaId);
+                int idM = Int32.Parse(cmd3.ExecuteScalar().ToString());
+                con.Close();
+                if (idM == 0)
+                {
+                    con.Open();
+                    string sql4 = @"UPDATE mesa SET deck_id = null WHERE id = @id";
+                    NpgsqlCommand cmd4 = new NpgsqlCommand(sql4, con);
+                    cmd4.Parameters.AddWithValue("@id", mesaId);
+                    cmd4.ExecuteNonQuery();
+                }
             }
         }
 

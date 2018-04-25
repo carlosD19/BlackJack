@@ -183,7 +183,7 @@ namespace BlackJack
 
         private void FrmJuego_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mBOL.Salir(usuario.Id);
+            mBOL.Salir(usuario.Id, mesa.Id);
             mBOL.Plantarse(mesa);
             Owner?.Show();
         }

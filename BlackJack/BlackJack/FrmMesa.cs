@@ -89,6 +89,10 @@ namespace BlackJack
                 {
                     lblError.Text = "Mesa registrada.";
                 }
+                else
+                {
+                    lblError.Text = "Error al agregar.";
+                }
             }
             catch (Exception ex)
             {
@@ -104,6 +108,10 @@ namespace BlackJack
                     if (bol.Modificar(mesa))
                     {
                         lblError.Text = "Mesa modificada.";
+                    }
+                    else
+                    {
+                        lblError.Text = "Error al modificar.";
                     }
                 }
             }
@@ -121,6 +129,10 @@ namespace BlackJack
                     if (bol.Eliminar(mesa))
                     {
                         lblError.Text = "Mesa Eliminada.";
+                    }
+                    else
+                    {
+                        lblError.Text = "Error al eliminar.";
                     }
                 }
             }

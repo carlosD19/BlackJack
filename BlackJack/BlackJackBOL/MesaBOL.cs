@@ -20,21 +20,19 @@ namespace BlackJackBOL
             {
                 throw new Exception("Nombre requerido.");
             }
-            if (mesa.Privada)
+            if (String.IsNullOrEmpty(mesa.Pass))
             {
-                if (String.IsNullOrEmpty(mesa.Pass))
-                {
-                    throw new Exception("Contraseña requerida.");
-                }
-                if (String.IsNullOrEmpty(rePass))
-                {
-                    throw new Exception("Re-Contraseña requerida.");
-                }
-                if (!mesa.Pass.Equals(rePass))
-                {
-                    throw new Exception("Las contraseñas no coinciden.");
-                }
+                throw new Exception("Contraseña requerida.");
             }
+            if (String.IsNullOrEmpty(rePass))
+            {
+                throw new Exception("Re-Contraseña requerida.");
+            }
+            if (!mesa.Pass.Equals(rePass))
+            {
+                throw new Exception("Las contraseñas no coinciden.");
+            }
+
             return dal.Insertar(mesa);
         }
 
@@ -76,9 +74,9 @@ namespace BlackJackBOL
             dal.Actualizar(mesa);
         }
 
-        public void Salir(int id)
+        public void Salir(int id, int mesaId)
         {
-            dal.SalirPartida(id);
+            dal.SalirPartida(id, mesaId);
         }
 
         public bool VerificarPass(string pass)
