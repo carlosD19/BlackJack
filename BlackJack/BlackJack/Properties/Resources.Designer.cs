@@ -113,6 +113,16 @@ namespace BlackJack.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cancelar__1_ {
+            get {
+                object obj = ResourceManager.GetObject("cancelar__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap card {
             get {
                 object obj = ResourceManager.GetObject("card", resourceCulture);
@@ -126,6 +136,16 @@ namespace BlackJack.Properties {
         internal static System.Drawing.Bitmap casino {
             get {
                 object obj = ResourceManager.GetObject("casino", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap correcto_simbolo {
+            get {
+                object obj = ResourceManager.GetObject("correcto_simbolo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

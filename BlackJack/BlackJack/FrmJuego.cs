@@ -10,14 +10,7 @@ namespace BlackJack
 {
     public partial class FrmJuego : Form
     {
-        
-        private int yJ1;
-        private int x;
-        private int y;
-        private int xRes;
-        private int yRes;
         private bool bus;
-        private Point point;
         private EUsuario usuario;
         private EMesa mesa;
         private MesaBOL mBOL;
@@ -28,6 +21,9 @@ namespace BlackJack
         private Panel fichaPanel;
         private Region rg;
         private int apuesta;
+        private int temp;
+        private int ultimoJug;
+
         public FrmJuego()
         {
             InitializeComponent();
@@ -44,14 +40,8 @@ namespace BlackJack
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            yJ1 = 120;
-            x = panel13.Location.X;
-            y = panel13.Location.Y;
             mBOL = new MesaBOL();
             jugadores = new List<EUsuario>();
-            point = new Point(panel13.Location.X - 3, panel13.Location.Y);
-            panel13.BringToFront();
-            panel13.Visible = false;
             voz = new SpeechRecognitionEngine();
             System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
             gp.AddEllipse(0, 0, picJ1.Width - 3, picJ1.Height - 3);
@@ -68,50 +58,102 @@ namespace BlackJack
                     switch (pb.Name)
                     {
                         case "pb1":
-                            apuesta += 1;
-                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            if (ValidarApuesta(1))
+                            {
+                                apuesta += 1;
+                                mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            }
                             break;
                         case "pb5":
-                            apuesta += 5;
-                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            if (ValidarApuesta(5))
+                            {
+                                apuesta += 5;
+                                mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            }
                             break;
                         case "pb25":
-                            apuesta += 25;
-                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            if (ValidarApuesta(25))
+                            {
+                                apuesta += 25;
+                                mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            }
                             break;
                         case "pb50":
-                            apuesta += 50;
-                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            if (ValidarApuesta(50))
+                            {
+                                apuesta += 50;
+                                mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            }
                             break;
                         case "pb100":
-                            apuesta += 100;
-                            mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            if (ValidarApuesta(100))
+                            {
+                                apuesta += 100;
+                                mBOL.AgregarFicha(pb.Tag.ToString(), usuario.Id);
+                            }
                             break;
                         default:
                             break;
                     }
+                    MessageBox.Show(apuesta.ToString());
                 }
             }
         }
 
-        private void DibujarFicha(Image img, int yF)
+        private bool ValidarApuesta(int cant)
         {
-            PictureBox pb = new PictureBox();
-            pb.Location = new System.Drawing.Point(2, yF);
-            pb.Size = new System.Drawing.Size(50, 50);
-            pb.SizeMode = PictureBoxSizeMode.Normal;
-            pb.BorderStyle = BorderStyle.None;
-            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-            gp.AddEllipse(0, 0, pb.Width - 3, pb.Height - 3);
-            Region rg = new Region(gp);
-            pb.Region = rg;
-            fichaPanel.Controls.Add(pb);
-            pb.Image = img;
-            pb.BringToFront();
-            pb.BackColor = Color.Transparent;
+            if (usuario.Dinero > apuesta + cant)
+            {
+                return true;
+            }
+            return false;
         }
 
-        private void DibujarCarta(List<Card> cartas)
+        private void DibujarFicha(List<string> fichas)
+        {
+            int yF = 120;
+            Image bitmap = null;
+
+            for (int i = 0; i < fichas.Count; i++)
+            {
+                switch (fichas[i])
+                {
+                    case "_1":
+                        bitmap = Properties.Resources._1;
+                        break;
+                    case "_5":
+                        bitmap = Properties.Resources._5;
+                        break;
+                    case "_25":
+                        bitmap = Properties.Resources._25;
+                        break;
+                    case "_50":
+                        bitmap = Properties.Resources._50;
+                        break;
+                    case "_100":
+                        bitmap = Properties.Resources._100;
+                        break;
+                    default:
+                        break;
+                }
+                PictureBox pb = new PictureBox();
+                pb.Location = new System.Drawing.Point(2, yF);
+                pb.Size = new System.Drawing.Size(50, 50);
+                pb.SizeMode = PictureBoxSizeMode.Normal;
+                pb.BorderStyle = BorderStyle.None;
+                System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+                gp.AddEllipse(0, 0, pb.Width - 3, pb.Height - 3);
+                Region rg = new Region(gp);
+                pb.Region = rg;
+                fichaPanel.Controls.Add(pb);
+                pb.Image = bitmap;
+                pb.BringToFront();
+                pb.BackColor = Color.Transparent;
+                yF -= 8;
+            }
+        }
+
+        private void DibujarCarta(List<Card> cartas, int usuId)
         {
             int xJ1 = 0;
             for (int i = 0; i < cartas.Count; i++)
@@ -122,7 +164,7 @@ namespace BlackJack
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.BorderStyle = BorderStyle.None;
                 cartaPanel.Controls.Add(pb);
-                if (usuario.Id == mesa.JugadorAct)
+                if (usuario.Id == usuId)
                 {
                     pb.Load(cartas[i].image);
                 }
@@ -142,66 +184,11 @@ namespace BlackJack
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //y += yRes;
-            //x -= xRes;
-            //if (y + 50 > cartas2.Location.Y)
-            //{
-            //    DibujarCarta();
-            //    panel13.Location = point;
-            //    x = panel13.Location.X;
-            //    y = panel13.Location.Y;
-            //    timer1.Enabled = false;
-            //    panel13.Visible = false;
-            //}
-            //else
-            //{
-            //    panel13.Location = new Point(x, y);
-            //}
-        }
-
         private void btnPedir_Click(object sender, EventArgs e)
         {
-            ObtenerXY(7);
-            panel13.Visible = true;
-            timer1.Enabled = true;
-        }
-
-        private void ObtenerXY(int p)
-        {
-            switch (p)
+            if (mesa.JugadorAct == usuario.Id)
             {
-                case 1:
-                    xRes = 60;
-                    yRes = 22;
-                    break;
-                case 2:
-                    xRes = 70;
-                    yRes = 35;
-                    break;
-                case 3:
-                    xRes = 70;
-                    yRes = 50;
-                    break;
-                case 4:
-                    xRes = 40;
-                    yRes = 55;
-                    break;
-                case 5:
-                    xRes = 10;
-                    yRes = 60;
-                    break;
-                case 6:
-                    xRes = -25;
-                    yRes = 44;
-                    break;
-                case 7:
-                    xRes = 40;
-                    yRes = 0;
-                    break;
-                default:
-                    break;
+                mBOL.AgregarCarta(mesa.Deck_Id, usuario.Id);
             }
         }
 
@@ -214,19 +201,22 @@ namespace BlackJack
 
         private void btnMicrofono_Click(object sender, EventArgs e)
         {
-            if (!mesa.Jugando)
+            if (mesa.JugadorAct == usuario.Id)
             {
-                if (!bus)
+                if (!mesa.Jugando)
                 {
-                    btnMicrofono.Image = Properties.Resources.micro;
-                    Escucha();
-                    bus = true;
-                }
-                else
-                {
-                    btnMicrofono.Image = Properties.Resources.nomicro;
-                    Escucha();
-                    bus = false;
+                    if (!bus)
+                    {
+                        btnMicrofono.Image = Properties.Resources.micro;
+                        Escucha();
+                        bus = true;
+                    }
+                    else
+                    {
+                        btnMicrofono.Image = Properties.Resources.nomicro;
+                        Escucha();
+                        bus = false;
+                    }
                 }
             }
         }
@@ -276,26 +266,36 @@ namespace BlackJack
 
         private void Refrescar()
         {
-            LimpiarPanel();
             mesa = mBOL.CargarPartida(mesa);
             jugadores = mBOL.CargarJug(mesa);
-            foreach (EUsuario u in jugadores)
+            int actual = jugadores.Count;
+            if (temp != actual)
             {
-                if (u.Id == usuario.Id)
-                {
-                    usuario = u;
-                }
-                AsignarPanel(u.Turno, u);
+                LimpiarPanel();
             }
-            lblEstado.Text = "Jugando .... " + mesa.JugadorAct;
-            btnPlantarse.Enabled = mesa.JugadorAct == usuario.Id;
-            btnPedir.Enabled = mesa.JugadorAct == usuario.Id;
-            btnMicrofono.Enabled = !mesa.Jugando;
+            for (int i = 0; i < jugadores.Count; i++)
+            {
+                if (jugadores[i].Id == usuario.Id)
+                {
+                    usuario = jugadores[i];
+                }
+                if (i == jugadores.Count - 1)
+                {
+                    ultimoJug = jugadores[jugadores.Count - 1].Id;
+                }
+                AsignarPanel(jugadores[i].Turno, jugadores[i]);
+                DibujarCarta(jugadores[i].Cartas, jugadores[i].Id);
+                DibujarFicha(jugadores[i].Fichas);
+            }
+            temp = jugadores.Count;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            mBOL.Plantarse(mesa);
+            if (mesa.JugadorAct == usuario.Id)
+            {
+                mBOL.Plantarse(mesa);
+            }
         }
 
         private void AsignarPanel(int turno, EUsuario usuario)
@@ -369,6 +369,31 @@ namespace BlackJack
             cartas6.Controls.Clear();
             fichas6.Controls.Clear();
             picJ6.Image = null;
+        }
+
+        private void btnApostrar_Click(object sender, EventArgs e)
+        {
+            if (apuesta > 0)
+            {
+                mBOL.JugadorApuesta(usuario.Id, apuesta, true);
+                mBOL.Plantarse(mesa);
+            }
+            if (ultimoJug == usuario.Id)
+            {
+                mBOL.RepartirCartas(jugadores, mesa.Deck_Id, mesa.Id);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            mBOL.JugadorApuesta(usuario.Id, 0, false);
+            mBOL.EliminarFicha(usuario.Id);
+            fichaPanel.Controls.Clear();
+            if (ultimoJug == usuario.Id)
+            {
+                mBOL.RepartirCartas(jugadores, mesa.Deck_Id, mesa.Id);
+            }
+            mBOL.Plantarse(mesa);
         }
     }
 }

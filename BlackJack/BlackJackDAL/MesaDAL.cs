@@ -67,6 +67,77 @@ namespace BlackJackDAL
                 cmd.Parameters.AddWithValue("@nom", ficha);
                 cmd.Parameters.AddWithValue("@idJ", id);
                 cmd.ExecuteNonQuery();
+                con.Close();
+                con.Open();
+                string sql1 = @"update usuario set aposto = @apos where id= @id";
+                NpgsqlCommand cmd1 = new NpgsqlCommand(sql1, con);
+                cmd1.Parameters.AddWithValue("@apos", true);
+                cmd1.Parameters.AddWithValue("@id", id);
+                cmd1.ExecuteNonQuery();
+            }
+        }
+
+        public void Apostar(int id, int apuesta, bool tipo)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"update usuario set aposto = @apos, apostado = apostado + @apuesta, dinero = dinero - @apuesta2 where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@apos", tipo);
+                cmd.Parameters.AddWithValue("@apuesta", apuesta);
+                cmd.Parameters.AddWithValue("@apuesta2", apuesta);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void Repartir(List<EUsuario> jugadores, string deckID, int mesaID)
+        {
+            for (int i = 0; i < jugadores.Count; i++)
+            {
+                if (jugadores[i].Aposto)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        ECarta carta = new ECarta();
+                        string URL = String.Format("https://deckofcardsapi.com/api/deck/{0}/draw/?count=1", deckID);
+                        string json = new WebClient().DownloadString(URL);
+                        carta = JsonConvert.DeserializeObject<ECarta>(json);
+
+                        using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+                        {
+                            con.Open();
+                            string sql = @"insert into carta_usu(carta, valor, id_jug) 
+                                values(@carta, @valor, @idJ)";
+                            NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                            cmd.Parameters.AddWithValue("@carta", carta.cards[0].image);
+                            cmd.Parameters.AddWithValue("@valor", carta.cards[0].value);
+                            cmd.Parameters.AddWithValue("@idJ", jugadores[i].Id);
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                    }
+                }
+            }
+            for (int j = 0; j < 2; j++)
+            {
+                ECarta carta = new ECarta();
+                string URL = String.Format("https://deckofcardsapi.com/api/deck/{0}/draw/?count=1", deckID);
+                string json = new WebClient().DownloadString(URL);
+                carta = JsonConvert.DeserializeObject<ECarta>(json);
+
+                using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+                {
+                    con.Open();
+                    string sql = @"insert into carta_mesa(carta, valor, id_mesa) 
+                                values(@carta, @valor, @idM)";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@carta", carta.cards[0].image);
+                    cmd.Parameters.AddWithValue("@valor", carta.cards[0].value);
+                    cmd.Parameters.AddWithValue("@idM", mesaID);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
@@ -81,6 +152,26 @@ namespace BlackJackDAL
                 cmd.Parameters.AddWithValue("@act", true);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 return reader.Read();
+            }
+        }
+
+        public void AgregarCarta(string deckID, int id)
+        {
+            ECarta carta = new ECarta();
+            string URL = String.Format("https://deckofcardsapi.com/api/deck/{0}/draw/?count=1", deckID);
+            string json = new WebClient().DownloadString(URL);
+            carta = JsonConvert.DeserializeObject<ECarta>(json);
+
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"insert into carta_usu(carta, valor, id_jug) 
+                                values(@carta, @valor, @idJ)";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@carta", carta.cards[0].image);
+                cmd.Parameters.AddWithValue("@valor", carta.cards[0].value);
+                cmd.Parameters.AddWithValue("@idJ", id);
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -109,6 +200,13 @@ namespace BlackJackDAL
                 cmd.Parameters.AddWithValue("@idUsu", id);
                 cmd.ExecuteNonQuery();
                 con.Close();
+                EliminarFichas(id);
+                con.Open();
+                string sql5 = @"delete from carta_usu where id_jug = @idUsu";
+                NpgsqlCommand cmd5 = new NpgsqlCommand(sql5, con);
+                cmd5.Parameters.AddWithValue("@idUsu", id);
+                cmd5.ExecuteNonQuery();
+                con.Close();
                 for (int i = 0; i < usuJug.Count; i++)
                 {
                     con.Open();
@@ -127,11 +225,54 @@ namespace BlackJackDAL
                 if (idM == 0)
                 {
                     con.Open();
-                    string sql4 = @"UPDATE mesa SET deck_id = null WHERE id = @id";
+                    string sql4 = @"UPDATE mesa SET deck_id = null, jugando = @jug WHERE id = @id";
                     NpgsqlCommand cmd4 = new NpgsqlCommand(sql4, con);
                     cmd4.Parameters.AddWithValue("@id", mesaId);
+                    cmd4.Parameters.AddWithValue("@jug", false);
                     cmd4.ExecuteNonQuery();
+                    con.Close();
+                    EliminarCartasMesa(mesaId);
                 }
+                ActualizarUsuario(id);
+            }
+        }
+
+        private void EliminarCartasMesa(int mesaId)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql6 = @"delete from carta_mesa where id_mesa = @id";
+                NpgsqlCommand cmd6 = new NpgsqlCommand(sql6, con);
+                cmd6.Parameters.AddWithValue("@id", mesaId);
+                cmd6.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+        public void EliminarFichas(int id)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql6 = @"delete from ficha_usu where id_jug = @idUsu";
+                NpgsqlCommand cmd6 = new NpgsqlCommand(sql6, con);
+                cmd6.Parameters.AddWithValue("@idUsu", id);
+                cmd6.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+        private void ActualizarUsuario(int id)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"update usuario set aposto = @apos where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@apos", false);
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -139,9 +280,7 @@ namespace BlackJackDAL
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
-                //Abrir una conexion
                 con.Open();
-                //Definir la consulta
                 string sql = @"update mesa set jug_actual = @sig where id = @id";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@id", mesa.Id);
@@ -154,9 +293,7 @@ namespace BlackJackDAL
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
-                //Abrir una conexion
                 con.Open();
-                //Definir la consulta
                 string sql = @"select id_jug from par_usu
                                 where id_mesa = @idP and orden > (select orden from par_usu where id_jug = @idJ and id_mesa = @idP)
                                 order by orden limit 1";

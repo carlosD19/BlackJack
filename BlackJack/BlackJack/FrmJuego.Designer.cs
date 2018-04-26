@@ -46,14 +46,10 @@
             this.pb25 = new System.Windows.Forms.PictureBox();
             this.pb50 = new System.Windows.Forms.PictureBox();
             this.pb100 = new System.Windows.Forms.PictureBox();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnPedir = new System.Windows.Forms.Button();
             this.btnPlantarse = new System.Windows.Forms.Button();
             this.btnMicrofono = new System.Windows.Forms.Button();
             this.cartas7 = new System.Windows.Forms.Panel();
-            this.lblEstado = new System.Windows.Forms.Label();
             this.tmAct = new System.Windows.Forms.Timer(this.components);
             this.picJ1 = new System.Windows.Forms.PictureBox();
             this.picJ2 = new System.Windows.Forms.PictureBox();
@@ -61,13 +57,13 @@
             this.picJ4 = new System.Windows.Forms.PictureBox();
             this.picJ5 = new System.Windows.Forms.PictureBox();
             this.picJ6 = new System.Windows.Forms.PictureBox();
+            this.btnApostrar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb25)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb100)).BeginInit();
-            this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ3)).BeginInit();
@@ -232,37 +228,13 @@
             this.pb100.Tag = "_100";
             this.pb100.Click += new System.EventHandler(this.pb1_Click);
             // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.Transparent;
-            this.panel13.Controls.Add(this.pictureBox1);
-            this.panel13.Location = new System.Drawing.Point(941, 12);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(80, 140);
-            this.panel13.TabIndex = 16;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::BlackJack.Properties.Resources.card;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 140);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // btnPedir
             // 
             this.btnPedir.BackColor = System.Drawing.Color.DarkBlue;
             this.btnPedir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPedir.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPedir.ForeColor = System.Drawing.Color.White;
-            this.btnPedir.Location = new System.Drawing.Point(534, 647);
+            this.btnPedir.Location = new System.Drawing.Point(628, 647);
             this.btnPedir.Name = "btnPedir";
             this.btnPedir.Size = new System.Drawing.Size(102, 30);
             this.btnPedir.TabIndex = 17;
@@ -276,7 +248,7 @@
             this.btnPlantarse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPlantarse.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPlantarse.ForeColor = System.Drawing.Color.White;
-            this.btnPlantarse.Location = new System.Drawing.Point(660, 647);
+            this.btnPlantarse.Location = new System.Drawing.Point(761, 647);
             this.btnPlantarse.Name = "btnPlantarse";
             this.btnPlantarse.Size = new System.Drawing.Size(102, 30);
             this.btnPlantarse.TabIndex = 18;
@@ -306,15 +278,6 @@
             this.cartas7.Name = "cartas7";
             this.cartas7.Size = new System.Drawing.Size(185, 154);
             this.cartas7.TabIndex = 20;
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(9, 9);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(35, 13);
-            this.lblEstado.TabIndex = 21;
-            this.lblEstado.Text = "label1";
             // 
             // tmAct
             // 
@@ -381,6 +344,34 @@
             this.picJ6.TabIndex = 27;
             this.picJ6.TabStop = false;
             // 
+            // btnApostrar
+            // 
+            this.btnApostrar.BackColor = System.Drawing.Color.DarkBlue;
+            this.btnApostrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnApostrar.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApostrar.ForeColor = System.Drawing.Color.White;
+            this.btnApostrar.Image = global::BlackJack.Properties.Resources.correcto_simbolo;
+            this.btnApostrar.Location = new System.Drawing.Point(12, 643);
+            this.btnApostrar.Name = "btnApostrar";
+            this.btnApostrar.Size = new System.Drawing.Size(43, 34);
+            this.btnApostrar.TabIndex = 28;
+            this.btnApostrar.UseVisualStyleBackColor = false;
+            this.btnApostrar.Click += new System.EventHandler(this.btnApostrar_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = global::BlackJack.Properties.Resources.cancelar__1_;
+            this.button1.Location = new System.Drawing.Point(73, 643);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 34);
+            this.button1.TabIndex = 29;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // FrmJuego
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -388,18 +379,18 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.mesa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1290, 689);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnApostrar);
             this.Controls.Add(this.picJ6);
             this.Controls.Add(this.picJ5);
             this.Controls.Add(this.picJ4);
             this.Controls.Add(this.picJ3);
             this.Controls.Add(this.picJ2);
             this.Controls.Add(this.picJ1);
-            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.cartas7);
             this.Controls.Add(this.btnMicrofono);
             this.Controls.Add(this.btnPlantarse);
             this.Controls.Add(this.btnPedir);
-            this.Controls.Add(this.panel13);
             this.Controls.Add(this.pb100);
             this.Controls.Add(this.pb50);
             this.Controls.Add(this.pb25);
@@ -426,8 +417,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb25)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb50)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb100)).EndInit();
-            this.panel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ3)).EndInit();
@@ -435,7 +424,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picJ5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ6)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -458,14 +446,10 @@
         private System.Windows.Forms.PictureBox pb25;
         private System.Windows.Forms.PictureBox pb50;
         private System.Windows.Forms.PictureBox pb100;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnPedir;
         private System.Windows.Forms.Button btnPlantarse;
         private System.Windows.Forms.Button btnMicrofono;
         private System.Windows.Forms.Panel cartas7;
-        private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Timer tmAct;
         private System.Windows.Forms.PictureBox picJ1;
         private System.Windows.Forms.PictureBox picJ2;
@@ -473,6 +457,8 @@
         private System.Windows.Forms.PictureBox picJ4;
         private System.Windows.Forms.PictureBox picJ5;
         private System.Windows.Forms.PictureBox picJ6;
+        private System.Windows.Forms.Button btnApostrar;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -1,4 +1,6 @@
-﻿namespace BlackJackENL
+﻿using System.Collections.Generic;
+
+namespace BlackJackENL
 {
     public class EMesa
     {
@@ -12,5 +14,6 @@
         public int Turno { get; set; }
         public string Deck_Id { get; set; }
         public bool Jugando { get; set; }
+        public List<Card> Cartas { get; set; }
     }
 }

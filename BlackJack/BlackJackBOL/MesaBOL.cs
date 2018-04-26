@@ -99,6 +99,10 @@ namespace BlackJackBOL
         {
             dal.SalirPartida(id, mesaId);
         }
+        public void EliminarFicha(int id)
+        {
+            dal.EliminarFichas(id);
+        }
 
         public bool VerificarPass(string pass)
         {
@@ -108,6 +112,21 @@ namespace BlackJackBOL
         public List<EUsuario> CargarJug(EMesa mesa)
         {
             return dal.CargarJugadores(mesa);
+        }
+
+        public void AgregarCarta(string deckID, int id)
+        {
+            dal.AgregarCarta(deckID, id);
+        }
+
+        public void JugadorApuesta(int id, int apuesta, bool tipo)
+        {
+            dal.Apostar(id, apuesta, tipo);
+        }
+
+        public void RepartirCartas(List<EUsuario> jugadores, string deck, int mesaId)
+        {
+            dal.Repartir(jugadores, deck, mesaId);
         }
     }
 }
