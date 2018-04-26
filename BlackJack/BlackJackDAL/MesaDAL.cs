@@ -9,6 +9,11 @@ namespace BlackJackDAL
 {
     public class MesaDAL
     {
+        /// <summary>
+        /// Metodo de eliminar mesa
+        /// </summary>
+        /// <param name="mesa">mesa que se va a eliminar</param>
+        /// <returns>si se elimino</returns>
         public bool Eliminar(EMesa mesa)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -22,7 +27,11 @@ namespace BlackJackDAL
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-
+        /// <summary>
+        /// Metodo de modificar mesa
+        /// </summary>
+        /// <param name="mesa">mesa que se va a modificar</param>
+        /// <returns>si se modifico</returns>
         public bool Modificar(EMesa mesa)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -39,7 +48,11 @@ namespace BlackJackDAL
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-
+        /// <summary>
+        /// Metodo de insertar mesa
+        /// </summary>
+        /// <param name="mesa">mesa que se va a insertar</param>
+        /// <returns>si se inserto</returns>
         public bool Insertar(EMesa mesa)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -55,7 +68,11 @@ namespace BlackJackDAL
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-
+        /// <summary>
+        /// Metodo de insertar ficha
+        /// </summary>
+        /// <param name="ficha">url de la ficha</param>
+        /// <param name="id">id del jugador</param>
         public void InsertarFicha(string ficha, int id)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -76,7 +93,12 @@ namespace BlackJackDAL
                 cmd1.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        /// Metodo para que un jugador apueste
+        /// </summary>
+        /// <param name="id">id del jugador</param>
+        /// <param name="apuesta">apuesta del jugador</param>
+        /// <param name="tipo">si apuesta o no</param>
         public void Apostar(int id, int apuesta, bool tipo)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -92,7 +114,10 @@ namespace BlackJackDAL
                 cmd.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        /// Metodo para saber si tiene blackjack
+        /// </summary>
+        /// <param name="id">id del jugador</param>
         public void ActualizarBJ(int id)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -105,7 +130,11 @@ namespace BlackJackDAL
                 cmd.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        /// Actualiza el dinero del jugador
+        /// </summary>
+        /// <param name="usu">usuario a actualizar</param>
+        /// <param name="dinero">cantidad de dinero</param>
         public void ActualizarDinero(EUsuario usu, int dinero)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -123,7 +152,12 @@ namespace BlackJackDAL
                 con.Close();
             }
         }
-
+        /// <summary>
+        /// Reparte cartas a los usuarios
+        /// </summary>
+        /// <param name="jugadores">jugadores a los que se le van a repartir cartas</param>
+        /// <param name="deckID">deck de mazo</param>
+        /// <param name="mesaID">mesa en la que estan jugando</param>
         public void Repartir(List<EUsuario> jugadores, string deckID, int mesaID)
         {
             for (int i = 0; i < jugadores.Count; i++)
@@ -174,7 +208,12 @@ namespace BlackJackDAL
             }
             CambiarEstadoJuego(mesaID, true);
         }
-
+        /// <summary>
+        /// Agrega cartas de la mesa
+        /// </summary>
+        /// <param name="cartas">cartas de la mesa</param>
+        /// <param name="deckID">deck del mazo</param>
+        /// <param name="mesaID">mesa en la que juegan</param>
         public void AgregarCartaMesa(List<Card> cartas, string deckID, int mesaID)
         {
             ECarta carta = new ECarta();
@@ -208,7 +247,11 @@ namespace BlackJackDAL
                 }
             }
         }
-
+        /// <summary>
+        /// Cambia el estado del juego
+        /// </summary>
+        /// <param name="mesaID">mesa en la que se juega</param>
+        /// <param name="estadoPartida">estado del juego</param>
         public void CambiarEstadoJuego(int mesaID, bool estadoPartida)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -221,7 +264,11 @@ namespace BlackJackDAL
                 cmd.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        /// Verifica la contraseña de la mesa
+        /// </summary>
+        /// <param name="pass">contraseña</param>
+        /// <returns>si es correcta</returns>
         public bool VerificarP(string pass)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -235,7 +282,11 @@ namespace BlackJackDAL
                 return reader.Read();
             }
         }
-
+        /// <summary>
+        /// Agrega cartas al usuario
+        /// </summary>
+        /// <param name="deckID"></param>
+        /// <param name="id"></param>
         public void AgregarCarta(string deckID, int id)
         {
             ECarta carta = new ECarta();

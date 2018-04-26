@@ -10,6 +10,11 @@ namespace BlackJackDAL
 {
     public class UsuarioDAL
     {
+        /// <summary>
+        /// Verificar si el usuario ya esta registrado
+        /// </summary>
+        /// <param name="usuario">usuario que se va a validar</param>
+        /// <returns>un usuario</returns>
         public EUsuario Verificar(EUsuario usuario)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -31,7 +36,12 @@ namespace BlackJackDAL
                 }
             }
         }
-
+        /// <summary>
+        /// Metodo que agrega dinero al jugador
+        /// </summary>
+        /// <param name="id">id del jugador</param>
+        /// <param name="value">valor a agregar</param>
+        /// <returns>true si lo agrego y false sino</returns>
         public bool AgregarDinero(int id, int value)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -44,7 +54,10 @@ namespace BlackJackDAL
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-
+        /// <summary>
+        /// Carga la lista de usuarios
+        /// </summary>
+        /// <returns>lista de usuarios</returns>
         public List<EUsuario> Cargar()
         {
             List<EUsuario> lista = new List<EUsuario>();
@@ -61,7 +74,11 @@ namespace BlackJackDAL
             }
             return lista;
         }
-
+        /// <summary>
+        /// Metodo que agrega un usuario a la BD
+        /// </summary>
+        /// <param name="usuario">usuario que se va a registrar</param>
+        /// <returns>un usuario</returns>
         private EUsuario InsertarUsuario(EUsuario usuario)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
@@ -91,7 +108,11 @@ namespace BlackJackDAL
             }
             return null;
         }
-
+        /// <summary>
+        /// Carga los atributos del usuario
+        /// </summary>
+        /// <param name="reader">atributos del usuario desde la base de datos</param>
+        /// <returns>un usuario</returns>
         private EUsuario CargarUsuario(NpgsqlDataReader reader)
         {
             EUsuario usu = new EUsuario();

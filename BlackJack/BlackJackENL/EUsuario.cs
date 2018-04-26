@@ -22,6 +22,11 @@ namespace BlackJackENL
         public int Turno { get; set; }
         public int ApuestaTemp { get; set; }
 
+        /// <summary>
+        /// Metodo que suma las cartas del jugador
+        /// </summary>
+        /// <param name="cartasJug">lista de cartas</param>
+        /// <returns>la suma de las cartas</returns>
         public int ContarCartas(List<Card> cartasJug)
         {
             int total = 0;
@@ -61,7 +66,12 @@ namespace BlackJackENL
                 return total;
             }
         }
-
+        /// <summary>
+        /// Metodo que compara la suma de las cartas de los jugadores con la del crupier
+        /// </summary>
+        /// <param name="totalJug">suma de las cartas del jugador</param>
+        /// <param name="cartasMesa">lista de cartas del crupier</param>
+        /// <returns>true si gano el jugador y false sino</returns>
         public bool ContarCartasCrupier(int totalJug, List<Card> cartasMesa)
         {
             int total = 0;

@@ -183,16 +183,13 @@ namespace BlackJackDAL
                                 return null;
                             }
 
-                            // :
                             if (this.NextToken != TOKEN.COLON)
                             {
                                 return null;
                             }
 
-                            // ditch the colon
                             this.json.Read();
 
-                            // value
                             table[name] = this.ParseValue();
                             break;
                     }
@@ -203,10 +200,8 @@ namespace BlackJackDAL
             {
                 List<object> array = new List<object>();
 
-                // ditch opening bracket
                 this.json.Read();
 
-                // [
                 var parsing = true;
                 while (parsing)
                 {
@@ -266,7 +261,6 @@ namespace BlackJackDAL
                 StringBuilder s = new StringBuilder();
                 char c;
 
-                // ditch opening quote
                 this.json.Read();
 
                 bool parsing = true;

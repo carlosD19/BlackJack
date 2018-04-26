@@ -121,7 +121,6 @@
     <Compile Include="Configuracion.cs" />
     <Compile Include="CorreoDAL.cs" />
     <Compile Include="MesaDAL.cs" />
-    <Compile Include="PartidaDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
     <Compile Include="MiniJsonDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
