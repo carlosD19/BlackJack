@@ -99,9 +99,9 @@ namespace BlackJackBOL
         {
             dal.SalirPartida(id, mesaId);
         }
-        public void EliminarFicha(int id)
+        public void NuevaPartida(int id)
         {
-            dal.EliminarFichas(id);
+            dal.EliminarFichasCartasTurno(id);
         }
 
         public bool VerificarPass(string pass)

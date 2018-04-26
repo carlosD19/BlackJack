@@ -298,12 +298,20 @@ namespace BlackJack
         private void timer1_Tick(object sender, EventArgs e)
         {
             listaM = mBOL.CargarTodo();
+            usuario = uBOL.VerificarUsuario(usuario);
             dgvMesa.Rows.Clear();
             foreach (EMesa m in listaM)
             {
                 bool privada = m.Privada;
                 dgvMesa.Rows.Add(m.Id, m.Nombre, m.Turno + "/" + m.Capacidad, privada);
             }
+        }
+
+        private void estadisticaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEstadistica frm = new FrmEstadistica(usuario);
+            frm.Show(this);
+            Hide();
         }
     }
 }

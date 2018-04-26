@@ -22,6 +22,7 @@ namespace BlackJack
         private Region rg;
         private int apuesta;
         private int temp;
+        private int tempJug;
         private int ultimoJug;
 
         public FrmJuego()
@@ -36,6 +37,7 @@ namespace BlackJack
             CenterToScreen();
             this.mesa = mesa;
             usuario = u;
+            this.Text = u.Nombre + " " + u.Apellido;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -95,7 +97,6 @@ namespace BlackJack
                         default:
                             break;
                     }
-                    MessageBox.Show(apuesta.ToString());
                 }
             }
         }
@@ -152,6 +153,29 @@ namespace BlackJack
                 yF -= 8;
             }
         }
+        private void DibujarCartaCrupier(List<Card> cartas)
+        {
+            int xJ1 = 0;
+            for (int i = 0; i < cartas.Count; i++)
+            {
+                PictureBox pb = new PictureBox();
+                pb.Location = new System.Drawing.Point(xJ1, 2);
+                pb.Size = new System.Drawing.Size(80, 140);
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.BorderStyle = BorderStyle.None;
+                cartas7.Controls.Add(pb);
+                if (i == 0)
+                {
+                    pb.Load(cartas[i].image);
+                }
+                else
+                {
+                    pb.Image = Properties.Resources.card;
+                }
+                pb.BringToFront();
+                xJ1 += 25;
+            }
+        }
 
         private void DibujarCarta(List<Card> cartas, int usuId)
         {
@@ -188,7 +212,12 @@ namespace BlackJack
         {
             if (mesa.JugadorAct == usuario.Id)
             {
-                mBOL.AgregarCarta(mesa.Deck_Id, usuario.Id);
+                if (mesa.Jugando)
+                {
+                    mBOL.AgregarCarta(mesa.Deck_Id, usuario.Id);
+                    Refrescar();
+                    ObtenerSumaCartas();
+                }
             }
         }
 
@@ -269,9 +298,14 @@ namespace BlackJack
             mesa = mBOL.CargarPartida(mesa);
             jugadores = mBOL.CargarJug(mesa);
             int actual = jugadores.Count;
+            int jugAct = mesa.JugadorAct;
             if (temp != actual)
             {
                 LimpiarPanel();
+            }
+            if (tempJug != jugAct)
+            {
+                ObtenerSumaCartas();
             }
             for (int i = 0; i < jugadores.Count; i++)
             {
@@ -281,21 +315,16 @@ namespace BlackJack
                 }
                 if (i == jugadores.Count - 1)
                 {
-                    ultimoJug = jugadores[jugadores.Count - 1].Id;
+                    ultimoJug = jugadores[i].Id;
                 }
                 AsignarPanel(jugadores[i].Turno, jugadores[i]);
                 DibujarCarta(jugadores[i].Cartas, jugadores[i].Id);
                 DibujarFicha(jugadores[i].Fichas);
+                DibujarCartaCrupier(mesa.Cartas);
             }
             temp = jugadores.Count;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (mesa.JugadorAct == usuario.Id)
-            {
-                mBOL.Plantarse(mesa);
-            }
+            tempJug = mesa.JugadorAct;
+            lblJugando.Text = "Jugando .... " + mesa.JugadorAct + " / " + usuario.Id;
         }
 
         private void AsignarPanel(int turno, EUsuario usuario)
@@ -369,6 +398,7 @@ namespace BlackJack
             cartas6.Controls.Clear();
             fichas6.Controls.Clear();
             picJ6.Image = null;
+            cartas7.Controls.Clear();
         }
 
         private void btnApostrar_Click(object sender, EventArgs e)
@@ -378,22 +408,96 @@ namespace BlackJack
                 mBOL.JugadorApuesta(usuario.Id, apuesta, true);
                 mBOL.Plantarse(mesa);
             }
+            Refrescar();
             if (ultimoJug == usuario.Id)
             {
-                mBOL.RepartirCartas(jugadores, mesa.Deck_Id, mesa.Id);
+                bool bus2 = false;
+                foreach (EUsuario us in jugadores)
+                {
+                    if (us.Aposto)
+                    {
+                        bus2 = true;
+                        break;
+                    }
+                }
+                if (bus2)
+                {
+                    mBOL.RepartirCartas(jugadores, mesa.Deck_Id, mesa.Id);
+                }
+            }
+            Refrescar();
+            ObtenerSumaCartas();
+        }
+
+        private void ObtenerSumaCartas()
+        {
+            foreach (EUsuario usu in jugadores)
+            {
+                if (usuario.Id == usu.Id)
+                {
+                    if (usuario.Cartas != null && usuario.Cartas.Count != 0)
+                    {
+                        int resultado = usuario.ContarCartas(usuario.Cartas);
+                        if (resultado == 21)
+                        {
+                            lblSuma.Text = "BlackJack";
+                        }
+                        else
+                        {
+                            lblSuma.Text = resultado.ToString();
+                        }
+                        break;
+                    }
+                }
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            mBOL.JugadorApuesta(usuario.Id, 0, false);
-            mBOL.EliminarFicha(usuario.Id);
-            fichaPanel.Controls.Clear();
-            if (ultimoJug == usuario.Id)
+            if (mesa.JugadorAct == usuario.Id)
             {
-                mBOL.RepartirCartas(jugadores, mesa.Deck_Id, mesa.Id);
+                mBOL.Plantarse(mesa);
+                mesa = mBOL.CargarPartida(mesa);
+                foreach (EUsuario u in jugadores)
+                {
+                    if (u.Id == mesa.JugadorAct)
+                    {
+                        if (u.Aposto == false)
+                        {
+                            mBOL.Plantarse(mesa);
+                            mesa = mBOL.CargarPartida(mesa);
+                        }
+                    }
+                }
+                Refrescar();
+                if (usuario.Id == ultimoJug)
+                {
+                    mBOL.RepartirCartas(jugadores, mesa.Deck_Id, mesa.Id);
+                }
             }
-            mBOL.Plantarse(mesa);
+        }
+
+        private void btnPlantarse_Click(object sender, EventArgs e)
+        {
+            if (mesa.JugadorAct == usuario.Id)
+            {
+                if (mesa.Jugando)
+                {
+                    mBOL.Plantarse(mesa);
+                    mesa = mBOL.CargarPartida(mesa);
+                    foreach (EUsuario u in jugadores)
+                    {
+                        if (u.Id == mesa.JugadorAct)
+                        {
+                            if (u.Aposto == false)
+                            {
+                                mBOL.Plantarse(mesa);
+                                mesa = mBOL.CargarPartida(mesa);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

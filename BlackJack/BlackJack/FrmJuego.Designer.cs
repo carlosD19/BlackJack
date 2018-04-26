@@ -58,7 +58,9 @@
             this.picJ5 = new System.Windows.Forms.PictureBox();
             this.picJ6 = new System.Windows.Forms.PictureBox();
             this.btnApostrar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.lblJugando = new System.Windows.Forms.Label();
+            this.lblSuma = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb25)).BeginInit();
@@ -254,7 +256,7 @@
             this.btnPlantarse.TabIndex = 18;
             this.btnPlantarse.Text = "Plantarse";
             this.btnPlantarse.UseVisualStyleBackColor = false;
-            this.btnPlantarse.Click += new System.EventHandler(this.button1_Click);
+            this.btnPlantarse.Click += new System.EventHandler(this.btnPlantarse_Click);
             // 
             // btnMicrofono
             // 
@@ -358,19 +360,43 @@
             this.btnApostrar.UseVisualStyleBackColor = false;
             this.btnApostrar.Click += new System.EventHandler(this.btnApostrar_Click);
             // 
-            // button1
+            // btnCancelar
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::BlackJack.Properties.Resources.cancelar__1_;
-            this.button1.Location = new System.Drawing.Point(73, 643);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 34);
-            this.button1.TabIndex = 29;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnCancelar.BackColor = System.Drawing.Color.DarkBlue;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancelar.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Image = global::BlackJack.Properties.Resources.cancelar__1_;
+            this.btnCancelar.Location = new System.Drawing.Point(73, 643);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(43, 34);
+            this.btnCancelar.TabIndex = 29;
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // lblJugando
+            // 
+            this.lblJugando.AutoSize = true;
+            this.lblJugando.BackColor = System.Drawing.Color.Transparent;
+            this.lblJugando.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJugando.ForeColor = System.Drawing.Color.White;
+            this.lblJugando.Location = new System.Drawing.Point(13, 13);
+            this.lblJugando.Name = "lblJugando";
+            this.lblJugando.Size = new System.Drawing.Size(83, 22);
+            this.lblJugando.TabIndex = 30;
+            this.lblJugando.Text = "Jugando";
+            // 
+            // lblSuma
+            // 
+            this.lblSuma.AutoSize = true;
+            this.lblSuma.BackColor = System.Drawing.Color.Transparent;
+            this.lblSuma.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuma.ForeColor = System.Drawing.Color.White;
+            this.lblSuma.Location = new System.Drawing.Point(17, 55);
+            this.lblSuma.Name = "lblSuma";
+            this.lblSuma.Size = new System.Drawing.Size(59, 22);
+            this.lblSuma.TabIndex = 31;
+            this.lblSuma.Text = "Suma";
             // 
             // FrmJuego
             // 
@@ -379,7 +405,9 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.mesa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1290, 689);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lblSuma);
+            this.Controls.Add(this.lblJugando);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnApostrar);
             this.Controls.Add(this.picJ6);
             this.Controls.Add(this.picJ5);
@@ -424,6 +452,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picJ5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picJ6)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -458,7 +487,9 @@
         private System.Windows.Forms.PictureBox picJ5;
         private System.Windows.Forms.PictureBox picJ6;
         private System.Windows.Forms.Button btnApostrar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label lblJugando;
+        private System.Windows.Forms.Label lblSuma;
     }
 }
 

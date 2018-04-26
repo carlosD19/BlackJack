@@ -137,7 +137,22 @@ namespace BlackJackDAL
                     cmd.Parameters.AddWithValue("@valor", carta.cards[0].value);
                     cmd.Parameters.AddWithValue("@idM", mesaID);
                     cmd.ExecuteNonQuery();
+                    con.Close();
                 }
+            }
+            CambiarEstadoJuego(mesaID, true);
+        }
+
+        public void CambiarEstadoJuego(int mesaID, bool estadoPartida)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"update mesa set jugando = @jugan where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", mesaID);
+                cmd.Parameters.AddWithValue("@jugan", estadoPartida);
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -200,13 +215,7 @@ namespace BlackJackDAL
                 cmd.Parameters.AddWithValue("@idUsu", id);
                 cmd.ExecuteNonQuery();
                 con.Close();
-                EliminarFichas(id);
-                con.Open();
-                string sql5 = @"delete from carta_usu where id_jug = @idUsu";
-                NpgsqlCommand cmd5 = new NpgsqlCommand(sql5, con);
-                cmd5.Parameters.AddWithValue("@idUsu", id);
-                cmd5.ExecuteNonQuery();
-                con.Close();
+                EliminarFichasCartasTurno(id);
                 for (int i = 0; i < usuJug.Count; i++)
                 {
                     con.Open();
@@ -233,7 +242,6 @@ namespace BlackJackDAL
                     con.Close();
                     EliminarCartasMesa(mesaId);
                 }
-                ActualizarUsuario(id);
             }
         }
 
@@ -250,7 +258,7 @@ namespace BlackJackDAL
             }
         }
 
-        public void EliminarFichas(int id)
+        public void EliminarFichasCartasTurno(int id)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
@@ -260,19 +268,19 @@ namespace BlackJackDAL
                 cmd6.Parameters.AddWithValue("@idUsu", id);
                 cmd6.ExecuteNonQuery();
                 con.Close();
-            }
-        }
-
-        private void ActualizarUsuario(int id)
-        {
-            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
-            {
+                con.Open();
+                string sql5 = @"delete from carta_usu where id_jug = @idUsu";
+                NpgsqlCommand cmd5 = new NpgsqlCommand(sql5, con);
+                cmd5.Parameters.AddWithValue("@idUsu", id);
+                cmd5.ExecuteNonQuery();
+                con.Close();
                 con.Open();
                 string sql = @"update usuario set aposto = @apos where id = @id";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@apos", false);
                 cmd.ExecuteNonQuery();
+                con.Close();
             }
         }
 
@@ -320,6 +328,8 @@ namespace BlackJackDAL
 
         public EMesa CargarPartidaID(int id)
         {
+            List<Card> cartas = new List<Card>();
+            EMesa mesa = new EMesa();
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
                 con.Open();
@@ -330,10 +340,33 @@ namespace BlackJackDAL
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    return CargarPartida(reader);
+                    mesa = CargarPartida(reader);
+                    mesa.Cartas = CargarCartasMesa(id);
+                    return mesa;
                 }
             }
             return null;
+        }
+
+        private List<Card> CargarCartasMesa(int id)
+        {
+            List<Card> cartas = new List<Card>();
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"select * from carta_mesa where id_mesa = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Card c = new Card();
+                    c.image = reader["carta"].ToString();
+                    c.value = reader["valor"].ToString();
+                    cartas.Add(c);
+                }
+            }
+            return cartas;
         }
 
         private EMesa CargarPartida(NpgsqlDataReader reader)
