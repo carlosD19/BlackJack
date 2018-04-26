@@ -98,7 +98,10 @@ namespace BlackJack
 
         private void depositarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FrmCuenta frm = new FrmCuenta(usuario);
+            frm.Show(this);
+            frm.Owner = this;
+            Hide();
         }
         private void EnviarGmail()
         {
@@ -311,6 +314,7 @@ namespace BlackJack
         {
             FrmEstadistica frm = new FrmEstadistica(usuario);
             frm.Show(this);
+            frm.Owner = this;
             Hide();
         }
     }

@@ -32,6 +32,19 @@ namespace BlackJackDAL
             }
         }
 
+        public bool AgregarDinero(int id, int value)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"update usuario set dinero = dinero + @din where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@din", value);
+                cmd.Parameters.AddWithValue("@id", id);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
         public List<EUsuario> Cargar()
         {
             List<EUsuario> lista = new List<EUsuario>();

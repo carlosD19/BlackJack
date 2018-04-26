@@ -128,5 +128,30 @@ namespace BlackJackBOL
         {
             dal.Repartir(jugadores, deck, mesaId);
         }
+
+        public void AgregarCartaMesa(List<Card> cartas, string deck, int mesaId)
+        {
+            dal.AgregarCartaMesa(cartas, deck, mesaId);
+        }
+
+        public void AgregarGanancia(EUsuario usu, int dinero)
+        {
+            dal.ActualizarDinero(usu, dinero);
+        }
+
+        public void ActualizarBJ(int id)
+        {
+            dal.ActualizarBJ(id);
+        }
+
+        public void EliminarCartaMesa(int id)
+        {
+            dal.EliminarCartasMesa(id);
+        }
+
+        public void ActualizarDeck(EMesa mesa)
+        {
+            dal.ActualizarDeck(mesa);
+        }
     }
 }

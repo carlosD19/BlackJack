@@ -30,5 +30,10 @@ namespace BlackJackBOL
         {
             return dal.Cargar();
         }
+
+        public bool Depositar(int id, int value)
+        {
+            return dal.AgregarDinero(id, value);
+        }
     }
 }

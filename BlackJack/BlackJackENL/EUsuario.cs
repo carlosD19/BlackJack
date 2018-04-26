@@ -15,10 +15,12 @@ namespace BlackJackENL
         public double Dinero { get; set; }
         public double Apostado { get; set; }
         public double Ganado { get; set; }
+        public bool BlackJack { get; set; }
         public bool Aposto { get; set; }
         public List<Card> Cartas { get; set; }
         public List<string> Fichas { get; set; }
         public int Turno { get; set; }
+        public int ApuestaTemp { get; set; }
 
         public int ContarCartas(List<Card> cartasJug)
         {
@@ -98,7 +100,7 @@ namespace BlackJackENL
             {
                 total2 = total;
             }
-            if(total >= totalJug && total >= 21)
+            if(total >= totalJug && total <= 21)
             {
                 return false;
             }

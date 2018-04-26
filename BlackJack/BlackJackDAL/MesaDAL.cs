@@ -82,13 +82,45 @@ namespace BlackJackDAL
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
                 con.Open();
-                string sql = @"update usuario set aposto = @apos, apostado = apostado + @apuesta, dinero = dinero - @apuesta2 where id = @id";
+                string sql = @"update usuario set aposto = @apos, apostado = apostado + @apuesta, dinero = dinero - @apuesta2, apuesta_temp = @apuestaT where id = @id";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@apos", tipo);
                 cmd.Parameters.AddWithValue("@apuesta", apuesta);
                 cmd.Parameters.AddWithValue("@apuesta2", apuesta);
+                cmd.Parameters.AddWithValue("@apuestaT", apuesta);
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void ActualizarBJ(int id)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"update usuario set blackjack = @blackJ where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@blackJ", true);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void ActualizarDinero(EUsuario usu, int dinero)
+        {
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"update usuario set dinero = dinero + @din, blackjack = @bj, ganado = ganado + @gan,
+                                apuesta_temp = @apuesta  where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", usu.Id);
+                cmd.Parameters.AddWithValue("@din", dinero);
+                cmd.Parameters.AddWithValue("@gan", dinero);
+                cmd.Parameters.AddWithValue("@bj", false);
+                cmd.Parameters.AddWithValue("@apuesta", 0);
+                cmd.ExecuteNonQuery();
+                con.Close();
             }
         }
 
@@ -141,6 +173,40 @@ namespace BlackJackDAL
                 }
             }
             CambiarEstadoJuego(mesaID, true);
+        }
+
+        public void AgregarCartaMesa(List<Card> cartas, string deckID, int mesaID)
+        {
+            ECarta carta = new ECarta();
+            List<Card> tempCarta = new List<Card>();
+            EUsuario usuario = new EUsuario();
+            int suma = usuario.ContarCartas(cartas);
+            int suma2 = 0;
+
+            while (suma <= 16)
+            {
+                string URL = String.Format("https://deckofcardsapi.com/api/deck/{0}/draw/?count=1", deckID);
+                string json = new WebClient().DownloadString(URL);
+                carta = JsonConvert.DeserializeObject<ECarta>(json);
+                tempCarta.Add(carta.cards[0]);
+                suma2 = usuario.ContarCartas(tempCarta);
+                suma = suma + suma2;
+            }
+            for (int i = 0; i < tempCarta.Count; i++)
+            {
+                using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+                {
+                    con.Open();
+                    string sql = @"insert into carta_mesa(carta, valor, id_mesa) 
+                                values(@carta, @valor, @idM)";
+                    NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@carta", tempCarta[i].image);
+                    cmd.Parameters.AddWithValue("@valor", tempCarta[i].value);
+                    cmd.Parameters.AddWithValue("@idM", mesaID);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
         }
 
         public void CambiarEstadoJuego(int mesaID, bool estadoPartida)
@@ -245,7 +311,7 @@ namespace BlackJackDAL
             }
         }
 
-        private void EliminarCartasMesa(int mesaId)
+        public void EliminarCartasMesa(int mesaId)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
             {
@@ -255,7 +321,33 @@ namespace BlackJackDAL
                 cmd6.Parameters.AddWithValue("@id", mesaId);
                 cmd6.ExecuteNonQuery();
                 con.Close();
+                con.Open();
+                string sql = @"update mesa set jugando = @jug where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", mesaId);
+                cmd.Parameters.AddWithValue("@jug", false);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                
             }
+        }
+        public void ActualizarDeck(EMesa mesa)
+        {
+            ECarta carta = new ECarta();
+            string URL = String.Format("https://deckofcardsapi.com/api/deck/{0}/shuffle/", mesa.Deck_Id);
+            string json = new WebClient().DownloadString(URL);
+            carta = JsonConvert.DeserializeObject<ECarta>(json);
+
+            using (NpgsqlConnection con = new NpgsqlConnection(Configuracion.ConStr))
+            {
+                con.Open();
+                string sql = @"update mesa set deck_id = @deck where id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", mesa.Id);
+                cmd.Parameters.AddWithValue("@deck", carta.deck_id);
+                cmd.ExecuteNonQuery();
+            }
+
         }
 
         public void EliminarFichasCartasTurno(int id)
@@ -501,7 +593,7 @@ namespace BlackJackDAL
             {
                 con.Open();
                 string sql = @"SELECT * FROM usuario FULL JOIN par_usu ON par_usu.id_jug = usuario.id
-                                WHERE par_usu.id_mesa = @idMesa";
+                                WHERE par_usu.id_mesa = @idMesa order by turno";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@idMesa", mesa.Id);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -570,7 +662,9 @@ namespace BlackJackDAL
             usu.Dinero = Double.Parse(reader["dinero"].ToString());
             usu.Email = reader["email"].ToString();
             usu.Turno = Int32.Parse(reader["turno"].ToString());
+            usu.ApuestaTemp = Int32.Parse(reader["apuesta_temp"].ToString());
             usu.Aposto = Boolean.Parse(reader["aposto"].ToString());
+            usu.BlackJack = Boolean.Parse(reader["blackjack"].ToString());
             return usu;
         }
     }

@@ -60,7 +60,7 @@
             this.btnApostrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblJugando = new System.Windows.Forms.Label();
-            this.lblSuma = new System.Windows.Forms.Label();
+            this.lblResultado = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb25)).BeginInit();
@@ -386,17 +386,16 @@
             this.lblJugando.TabIndex = 30;
             this.lblJugando.Text = "Jugando";
             // 
-            // lblSuma
+            // lblResultado
             // 
-            this.lblSuma.AutoSize = true;
-            this.lblSuma.BackColor = System.Drawing.Color.Transparent;
-            this.lblSuma.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSuma.ForeColor = System.Drawing.Color.White;
-            this.lblSuma.Location = new System.Drawing.Point(17, 55);
-            this.lblSuma.Name = "lblSuma";
-            this.lblSuma.Size = new System.Drawing.Size(59, 22);
-            this.lblSuma.TabIndex = 31;
-            this.lblSuma.Text = "Suma";
+            this.lblResultado.AutoSize = true;
+            this.lblResultado.BackColor = System.Drawing.Color.Transparent;
+            this.lblResultado.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultado.ForeColor = System.Drawing.Color.White;
+            this.lblResultado.Location = new System.Drawing.Point(17, 55);
+            this.lblResultado.Name = "lblResultado";
+            this.lblResultado.Size = new System.Drawing.Size(0, 22);
+            this.lblResultado.TabIndex = 31;
             // 
             // FrmJuego
             // 
@@ -405,7 +404,7 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.mesa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1290, 689);
-            this.Controls.Add(this.lblSuma);
+            this.Controls.Add(this.lblResultado);
             this.Controls.Add(this.lblJugando);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnApostrar);
@@ -489,7 +488,7 @@
         private System.Windows.Forms.Button btnApostrar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lblJugando;
-        private System.Windows.Forms.Label lblSuma;
+        private System.Windows.Forms.Label lblResultado;
     }
 }
 
